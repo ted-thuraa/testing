@@ -1,0 +1,43 @@
+{
+    "name": "vue",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --port 3000",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@amcharts/amcharts5": "^5.3.12",
+        "@amcharts/amcharts5-geodata": "^5.1.0",
+        "@headlessui/vue": "^1.7.14",
+        "@heroicons/vue": "^2.0.18",
+        "@tailwindcss/forms": "^0.5.4",
+        "@tiptap/pm": "^2.0.4",
+        "@tiptap/starter-kit": "^2.0.4",
+        "@tiptap/vue-3": "^2.0.4",
+        "axios": "^1.4.0",
+        "chart.js": "^4.3.0",
+        "flowbite": "^1.8.1",
+        "lodash": "^4.17.21",
+        "swiper": "^9.3.2",
+        "uuid": "^9.0.0",
+        "vue": "^3.2.45",
+        "vue-advanced-cropper": "^2.8.8",
+        "vue-google-api": "^0.2.0",
+        "vue-plyr": "^7.0.0",
+        "vue-router": "^4.0.13",
+        "vue-social-sharing": "^4.0.0-alpha4",
+        "vuedraggable": "^4.1.0",
+        "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
+        "autoprefixer": "^10.4.14",
+        "postcss": "^8.4.26",
+        "sass": "^1.64.1",
+        "tailwindcss": "^3.3.3",
+        "vite": "^4.0.0"
+    }
+}
