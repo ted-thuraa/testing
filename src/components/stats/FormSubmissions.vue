@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, watch, computed, onMounted, onBeforeUnmount, toRefs } from "vue";
+import { ref, onMounted, onBeforeUnmount, toRefs } from "vue";
 import * as am5 from "@amcharts/amcharts5";
 //import * as am5map from "@amcharts/amcharts5/map";
 //import * as am5 from "@amcharts/amcharts5";
@@ -11,15 +11,15 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { useStore } from "vuex";
+
 const store = useStore();
 
 const props = defineProps({
-  topLinkData: Object,
+  formdata: Object,
 });
-const { topLinkData } = toRefs(props);
+const { formdata } = toRefs(props);
 
-let username = ref("");
-let LinkData = ref(null);
+const errors = ref(null);
 const chartdiv = ref(null);
 let root = null;
 let chart = null;
@@ -27,13 +27,14 @@ let yRenderer = null;
 let yAxis = null;
 let xAxis = null;
 let series = null;
-let errors = ref(null);
 
-const getTopLinks = async () => {
+let polygonSeries = null;
+
+const getTopforms = async () => {
   try {
-    const res = await store.dispatch("fetchTopLinks");
+    const res = await store.dispatch("fetchTopForms");
     console.log(res.data);
-    LinkData.value = res.data;
+    formdata.value = res.data;
   } catch (error) {
     console.log(error);
     errors.value = error.response.data.errors;
@@ -41,7 +42,7 @@ const getTopLinks = async () => {
 };
 
 onMounted(async () => {
-  //await getTopLinks();
+  //await getTopforms();
   root = am5.Root.new(chartdiv.value);
 
   root.setThemes([am5themes_Animated.new(root)]);
@@ -101,7 +102,7 @@ onMounted(async () => {
       name: "Series 1",
       xAxis: xAxis,
       yAxis: yAxis,
-      valueXField: "clicks",
+      valueXField: "responces",
       categoryYField: "name",
       tooltip: am5.Tooltip.new(root, {
         pointerOrientation: "left",
@@ -127,7 +128,7 @@ onMounted(async () => {
   });
 
   // Set data
-  let data = topLinkData.value;
+  let data = formdata.value;
   // let data = [
   //   {
   //     network: "Mailing list",

@@ -1,442 +1,403 @@
 <template>
-    <!-- eslint-disable -->
+  <!-- eslint-disable -->
 
-    <TransitionRoot appear :show="isSelectLinkTypeOpen" as="template">
-        <Dialog
-            as="div"
-            @close="$emit('closeSelectLinkTypeModal')"
-            class="relative z-10"
+  <TransitionRoot appear :show="isSelectLinkTypeOpen" as="template">
+    <Dialog
+      as="div"
+      @close="$emit('closeSelectLinkTypeModal')"
+      class="relative z-10"
+    >
+      <TransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div class="fixed inset-0 bg-black bg-opacity-25" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 overflow-y-auto">
+        <div
+          class="flex min-h-full items-center justify-center p-4 text-center"
         >
-            <TransitionChild
-                as="template"
-                enter="duration-300 ease-out"
-                enter-from="opacity-0"
-                enter-to="opacity-100"
-                leave="duration-200 ease-in"
-                leave-from="opacity-100"
-                leave-to="opacity-0"
+          <TransitionChild
+            as="template"
+            enter="transition ease-out duration-200"
+            enter-from="opacity-0 translate-y-1"
+            enter-to="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leave-from="opacity-100 translate-y-0"
+            leave-to="opacity-0 translate-y-1"
+          >
+            <DialogPanel
+              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-2 text-left align-middle shadow-xl transition-all ring-1 ring-black ring-opacity-5"
             >
-                <div class="fixed inset-0 bg-black bg-opacity-25" />
-            </TransitionChild>
-
-            <div class="fixed inset-0 overflow-y-auto">
-                <div
-                    class="flex min-h-full items-center justify-center p-4 text-center"
-                >
-                    <TransitionChild
-                        as="template"
-                        enter="duration-300 ease-out"
-                        enter-from="opacity-0 scale-95"
-                        enter-to="opacity-100 scale-100"
-                        leave="duration-200 ease-in"
-                        leave-from="opacity-100 scale-100"
-                        leave-to="opacity-0 scale-95"
+              <div class="overflow-hidden rounded-lg">
+                <div class="relative gap-8 bg-white p-7">
+                  <button
+                    @click="
+                      $emit('AddLink', {
+                        category: 'Link',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
                     >
-                        <DialogPanel
-                            class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
-                        >
-                            <div
-                                class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5"
-                            >
-                                <div
-                                    class="relative grid gap-8 bg-white p-7 lg:grid-cols-2"
-                                >
-                                    <button
-                                        @click="
-                                            $emit('AddLink', {
-                                                category: 'Link',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Link
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Header',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Section header
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            $emit('AddLink', {
-                                                category: 'SaaS',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Startup/Website
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Image',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Image/Video
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Text',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Text/Quote
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Portfolio',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Portfolio Project.
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Form',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Contact Form.
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Video',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Video.
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Map',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Map.
-                                            </p>
-                                        </div>
-                                    </button>
-                                    <button
-                                        @click="
-                                            AddItem({
-                                                category: 'Store',
-                                            })
-                                        "
-                                        class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <div
-                                            class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                                        >
-                                            <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    class="w-6 h-6 stroke-black"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <p
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Store.
-                                            </p>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="bg-gray-50 p-4">
-                                    <a
-                                        href="##"
-                                        class="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                    >
-                                        <span class="flex items-center">
-                                            <span
-                                                class="text-sm font-medium text-gray-900"
-                                            >
-                                                Documentation
-                                            </span>
-                                        </span>
-                                        <span
-                                            class="block text-sm text-gray-500"
-                                        >
-                                            Start integrating products and tools
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="mt-4">
-                                <button
-                                    type="button"
-                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                    @click="$emit('closeSelectLinkTypeModal')"
-                                >
-                                    Got it, thanks!
-                                </button>
-                            </div>
-                        </DialogPanel>
-                    </TransitionChild>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Link
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Add any link</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Header',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Header
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Organize your pag</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      $emit('AddLink', {
+                        category: 'SaaS',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Startup/website
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">
+                        Indie hackers showcase your portfolio
+                      </p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Text',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Text/Quote
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Got something to say</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Portfolio',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Portfolio/project
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Showcase your projects</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Image',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Image
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Showcase your images</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Form',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Form
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Collect data with forms</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Video',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Video
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">
+                        Share youtube and vimeo videos
+                      </p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'DigitalProduct',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Digital Products
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Sell Digital products</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
+                  <button
+                    @click="
+                      AddItem({
+                        category: 'Store',
+                      })
+                    "
+                    class="group relative flex w-full rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <div
+                      class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="h-6 w-6 text-gray-900 group-hover:text-indigo-600"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                        />
+                      </svg>
+                    </div>
+                    <div class="w-56 text-left ml-6">
+                      <p class="font-semibold text-gray-900">
+                        Store
+                        <span class="absolute inset-0" />
+                      </p>
+                      <p class="mt-1 text-gray-600">Sell products</p>
+                    </div>
+                    <div class="text-purple-700 font-semibold ml-4">Add</div>
+                  </button>
                 </div>
-            </div>
-        </Dialog>
-    </TransitionRoot>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script setup>
 import {
-    TransitionRoot,
-    TransitionChild,
-    Dialog,
-    DialogPanel,
-    DialogTitle,
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
 } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 import { ref, watch, computed, onMounted, toRefs } from "vue";
@@ -446,27 +407,27 @@ const store = useStore();
 const emit = defineEmits(["AddLink, closeSelectLinkTypeModal"]);
 
 const props = defineProps({
-    isSelectLinkTypeOpen: Boolean,
+  isSelectLinkTypeOpen: Boolean,
 });
 
 const { isSelectLinkTypeOpen } = toRefs(props);
 
 //each linkc item needs to have this fields
 let model = ref({
-    name: "",
-    url: null,
-    redirect_link: null,
-    description: null,
-    category: null,
-    active: null,
-    clicks: null,
-    icon: null,
-    thumbnailimage: null,
-    layout: null,
-    data: {},
-    bg_color: null,
-    text_color: null,
-    btn_color: null,
+  name: "",
+  url: null,
+  redirect_link: null,
+  description: null,
+  category: null,
+  active: null,
+  clicks: null,
+  icon: null,
+  thumbnailimage: null,
+  layout: null,
+  data: {},
+  bg_color: null,
+  text_color: null,
+  btn_color: null,
 });
 let name = ref("");
 let category = ref("");
@@ -474,39 +435,39 @@ let url = ref("");
 let errors = ref(null);
 
 const AddItem = async (payload) => {
-    console.log(payload);
-    model.value.category = payload.category;
-    try {
-        await store.dispatch("addLink", model.value);
-        await store.dispatch("getAllLinks");
-        // setTimeout(() => {
-        //     emit("closeSelectLinkTypeModal");
-        //     name.value = "";
-        //     category.value = "";
-        //     url.value = "";
-        // }, 100);
-    } catch (error) {
-        console.log(error);
-        errors.value = error.response.data.errors;
-    }
+  console.log(payload);
+  model.value.category = payload.category;
+  try {
+    await store.dispatch("addLink", model.value);
+    await store.dispatch("getAllLinks");
+    setTimeout(() => {
+      emit("closeSelectLinkTypeModal");
+      name.value = "";
+      category.value = "";
+      url.value = "";
+    }, 100);
+  } catch (error) {
+    console.log(error);
+    errors.value = error.response.data.errors;
+  }
 };
 
 const solutions = [
-    {
-        name: "Link",
-        description: "Measure actions your users take",
-        href: "'AddLink', { category: 'Link' }",
-        icon: `
+  {
+    name: "Link",
+    description: "Measure actions your users take",
+    href: "'AddLink', { category: 'Link' }",
+    icon: `
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class="w-6 h-6 stroke-black">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
         </svg>
       `,
-    },
-    {
-        name: "Automations",
-        description: "Create your own targeted content",
-        href: "",
-        icon: `
+  },
+  {
+    name: "Automations",
+    description: "Create your own targeted content",
+    href: "",
+    icon: `
         <svg
           width="48"
           height="48"
@@ -529,12 +490,12 @@ const solutions = [
           />
         </svg>
       `,
-    },
-    {
-        name: "Reports",
-        description: "Keep track of your growth",
-        href: "",
-        icon: `
+  },
+  {
+    name: "Reports",
+    description: "Keep track of your growth",
+    href: "",
+    icon: `
         <svg
           width="48"
           height="48"
@@ -551,6 +512,6 @@ const solutions = [
           <rect x="33" y="12" width="2" height="24" fill="#FB923C" />
         </svg>
       `,
-    },
+  },
 ];
 </script>

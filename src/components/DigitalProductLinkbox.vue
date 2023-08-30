@@ -37,7 +37,7 @@
           <div class="">
             <span
               class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Form</span
+              >Edit Digital Product</span
             >
           </div>
         </div>
@@ -106,48 +106,18 @@
             </div>
           </div>
 
-          <div class="">
-            <!-- <label for="url" class="text-sm leading-6 text-gray-600"
-                  >url</label
-                > -->
-            <!-- <div class="relative w-auto font-medium">
-              <input
-                type="text"
-                v-model="url"
-                @change="updateLink"
-                id="input-group-1"
-                class="inputs bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
-                placeholder="Url"
-              />
-              <div
-                class="absolute inset-y-0 left-0 flex items-center pr-3.5 pointer-events-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-4 h-4 text-gray-500"
-                >
-                  <path
-                    d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"
-                  />
-                </svg>
-              </div>
-            </div> -->
-          </div>
-
           <div
             class="absolute z-10 inset-x-0 bottom-0 flex items-center rounded-[10px] p-[0.375rem]"
           >
             <div class="flex flex-col items-center justify-center w-full">
               <div class="bgfilterblur p-1 rounded-[2.5rem]">
                 <button
-                  @click="(isUploadImage = !isUploadImage), (isDelete = false)"
+                  @click="(isEmbbedLink = !isEmbbedLink), (isDelete = false)"
                   class="cursor-pointer pointer-events-auto rounded-[4rem] outline-none mr-2 !p-2 text-black"
                   :class="
-                    isUploadImage ? ' bg-white text-purple-700 shadow-lg' : ''
+                    isEmbbedLink ? ' bg-white text-purple-700 shadow-lg' : ''
                   "
-                  :color="isUploadImage ? '#00000' : '#676B5F'"
+                  :color="isEmbbedLink ? '#00000' : '#676B5F'"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -160,64 +130,40 @@
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  @click="isUpdateLayout = !isUpdateLayout"
-                  class="cursor-pointer pointer-events-auto rounded-[4rem] outline-none mr-2 !p-1.5 text-black"
-                  :class="
-                    isUpdateLayout ? ' bg-white text-purple-700 shadow-lg' : ''
-                  "
-                  :color="isUpdateLayout ? '#FFFFFF' : '#676B5F'"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-5 h-5"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                      d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
                     />
                   </svg>
                 </button>
 
                 <button
-                  @click="isEditFormData = !isEditFormData"
+                  @click="isEditDigitalProductData = !isEditDigitalProductData"
                   class="cursor-pointer pointer-events-auto rounded-[4rem] outline-none mr-2 !p-1.5 text-black"
-                  :class="
-                    isEditFormData ? ' bg-white text-purple-700 shadow-lg' : ''
-                  "
+                  :class="isEditDigitalProductData ? ' bg-white shadow-lg' : ''"
+                  :color="isEditDigitalProductData ? '#FFFFFF' : '#676B5F'"
                 >
                   <svg
-                    class="cursor-pointer w-5 h-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
+                    class="w-5 h-5"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                      d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
                     />
                   </svg>
                 </button>
+
                 <button
                   @click="
                     isDelete = true;
-                    isUpdateLayout = false;
-                    isEditFormData = false;
+                    isEmbbedLink = false;
                   "
                   class="cursor-pointer pointer-events-auto rounded-[4rem] outline-none !p-1.5 text-black"
-                  :class="isDelete ? ' bg-white text-purple-700 shadow-lg' : ''"
+                  :class="isDelete ? ' bg-white shadow-lg' : ''"
                   :color="isDelete ? '#FFFFFF' : '#676B5F'"
                 >
                   <svg
@@ -245,8 +191,7 @@
           class="overflow-hidden"
           :class="[
             {
-              'max-h-[180px] transition-all duration-300 ease-in mt-10':
-                isDelete,
+              'max-h-[180px] transition-all duration-300 ease-in': isDelete,
             },
             {
               'max-h-0 transition-all duration-200 ease-out': !isDelete,
@@ -289,17 +234,16 @@
           class="overflow-hidden"
           :class="[
             {
-              'max-h-[280px] transition-all duration-300 ease-in  mt-10':
-                isUploadImage,
+              'max-h-[180px] transition-all duration-300 ease-in': isEmbbedLink,
             },
             {
-              'max-h-0 transition-all duration-200 ease-out': !isUploadImage,
+              'max-h-0 transition-all duration-200 ease-out': !isEmbbedLink,
             },
           ]"
         >
           <div class="relative w-full bg-[#DFE2D9] py-1.5">
             <svg
-              @click="isUploadImage = false"
+              @click="isEmbbedLink = false"
               color="#45494A"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -316,35 +260,39 @@
             </svg>
 
             <div class="text-center text-sm font-bold text-[#45494A]">
-              Add Thumbnail
+              Add Link
             </div>
           </div>
 
           <div class="w-full flex items-center justify-between px-4 py-5">
-            <img class="rounded-lg w-[80px] aspect-square" :src="link.image" />
-
-            <div class="w-full pl-3">
-              <button
-                @click="openCropper = true"
-                class="flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
-              >
-                Change Icon
-              </button>
-            </div>
-          </div>
-          <div class="w-full flex items-center justify-between px-4 py-5">
-            <img
-              class="rounded-lg w-[80px] aspect-square"
-              :src="link.thumbnailimage"
-            />
-
-            <div class="w-full pl-3">
-              <button
-                @click="openThumbnailCropper = true"
-                class="flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
-              >
-                Change Thumbnail
-              </button>
+            <div class="">
+              <!-- <label for="url" class="text-sm leading-6 text-gray-600"
+                  >url</label
+                > -->
+              <div class="relative w-auto font-medium">
+                <input
+                  type="text"
+                  v-model="url"
+                  @change="updateLink"
+                  id="input-group-1"
+                  class="inputs bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
+                  placeholder="Url"
+                />
+                <div
+                  class="absolute inset-y-0 left-0 flex items-center pr-3.5 pointer-events-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-4 h-4 text-gray-500"
+                  >
+                    <path
+                      d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -354,7 +302,7 @@
           class="overflow-hidden"
           :class="[
             {
-              'max-h-[180px] transition-all duration-300 ease-in mt-10':
+              'max-h-[180px] transition-all duration-300 ease-in':
                 isUpdateLayout,
             },
             {
@@ -439,35 +387,88 @@
         </div>
 
         <div
-          id="FooterAddWaitinglistBtnSection"
+          id="PortfoliodataSection"
           class="overflow-hidden"
           :class="[
             {
-              'max-h-[1640px] overflow-y-auto transition-all duration-300 ease-in mt-10':
-                isEditFormData,
+              'max-h-[1480px] transition-all duration-300 ease-in':
+                isEditDigitalProductData,
             },
             {
-              'max-h-0 transition-all duration-200 ease-out': !isEditFormData,
+              'max-h-0 transition-all duration-200 ease-out':
+                !isEditDigitalProductData,
             },
           ]"
         >
           <div class="relative w-full bg-[#DFE2D9] py-1.5">
-            <Icon
-              @click="isEditFormData = false"
-              name="mdi:close"
-              class="absolute right-1 top-[6px] cursor-pointer"
-              size="20"
+            <svg
+              @click="isEditDigitalProductData = false"
               color="#45494A"
-            />
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="absolute right-1 top-[6px] cursor-pointer w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
             <div class="text-center text-sm font-bold text-[#45494A]">
               Add btn
             </div>
           </div>
 
-          <div
-            class="w-full flex flex-col items-center justify-between px-4 py-5"
-          >
-            <FormData :link="link" />
+          <div class="w-full flex flex-col justify-between px-4 py-5">
+            <div class="mb-2">
+              <p class="text-gray-700 p-0 m-0 font-semibold text-base">
+                Thumbnail
+              </p>
+            </div>
+            <div class="mb-5">
+              <p class="p-0 text-[14px] text-slate-700">
+                Add your portfolio thumbnail
+              </p>
+            </div>
+            <div
+              class="group border border-black border-dashed mb-4 relative w-full h-auto bg-gray-100 rounded-2xl"
+            >
+              <div class="flex h-[250px] w-full overflow-hidden rounded-2xl">
+                <img
+                  v-if="link.thumbnailimage"
+                  class="w-full h-full object-cover"
+                  :src="link.thumbnailimage"
+                  alt=""
+                />
+              </div>
+              <div
+                class="absolute inset-0 flex items-center justify-center bg-transparent rounded-2xl group-hover:bg-gray-300/50"
+              >
+                <button
+                  class="flex items-center justify-center p-2 rounded-md bg-neutral-600/50 border-neutral/50 group-hover:bg-neutral-800/50 group-hover:border-neutral"
+                  @click="openCropper = true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-20 h-20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <DigitalProductData :link="link" />
           </div>
         </div>
 
@@ -475,12 +476,6 @@
           v-if="openCropper"
           :linkId="link.id"
           @data="data = $event"
-          @close="openCropper = false"
-        />
-        <CropperModal
-          v-if="openThumbnailCropper"
-          :linkId="link.id"
-          @data="thumbnaildata = $event"
           @close="openCropper = false"
         />
       </div>
@@ -499,8 +494,8 @@ import {
   RadioGroupLabel,
   RadioGroupOption,
 } from "@headlessui/vue";
-import FormData from "./FormData.vue";
 import CropperModal from "./CropperModal.vue";
+import DigitalProductData from "./DigitalProductData.vue";
 import debounce from "lodash/debounce";
 import { watch, ref, onMounted, toRefs } from "vue";
 import { useStore } from "vuex";
@@ -516,16 +511,15 @@ const { link, selectedId, selectedStr } = toRefs(props);
 const emit = defineEmits(["updatedInput"]);
 
 let name = ref("");
+let description = ref("");
 let url = ref("");
 let data = ref(null);
-let thumbnaildata = ref(null);
-let isActive = ref(false);
 let isDelete = ref(false);
 let openCropper = ref(false);
-let openThumbnailCropper = ref(false);
 let isUploadImage = ref(false);
+let isEmbbedLink = ref(false);
 let isUpdateLayout = ref(false);
-let isEditFormData = ref(false);
+let isEditDigitalProductData = ref(false);
 let errors = ref(null);
 
 const Layout = [
@@ -602,24 +596,22 @@ const Layout = [
       `,
   },
 ];
-
 const selectedLayout = ref(Layout[0]);
 
 onMounted(() => {
   name.value = link.value.name;
   url.value = link.value.url;
-
-  isActive.value = link.value.active ? true : false;
+  description.value = link.value.description;
 });
 
 const updateLink = debounce(async () => {
+  console.log(name.value);
   try {
     await store.dispatch("updateLink", {
       id: link.value.id,
       name: name.value,
-      deascription: null,
+      description: description.value,
       url: url.value,
-      active: isActive.value,
     });
     await store.dispatch("getAllLinks");
   } catch (error) {
@@ -666,20 +658,11 @@ const editImage = () => {
   }
 };
 
-const updateLinkImage = async () => {
+const updateDigitalProductThumbnail = async () => {
   try {
-    await store.dispatch("updateLinkImage", data.value);
+    await store.dispatch("updateThumbnailLinkImage", data.value);
     await store.dispatch("getAllLinks");
     setTimeout(() => (openCropper.value = false), 300);
-  } catch (error) {
-    console.log(error);
-  }
-};
-const updateThumbnailLinkImage = async () => {
-  try {
-    await store.dispatch("updateThumbnailLinkImage", thumbnaildata.value);
-    await store.dispatch("getAllLinks");
-    setTimeout(() => (openThumbnailCropper.value = false), 300);
   } catch (error) {
     console.log(error);
   }
@@ -689,6 +672,9 @@ const updateItemLayout = async () => {
   errors.value = null;
 
   try {
+    console.log(selectedLayout.value);
+    console.log(link.id);
+
     await store.dispatch("updateItemLayout", {
       Layout: selectedLayout.value,
       id: link.value.id,
@@ -712,6 +698,15 @@ const deleteLink = async () => {
 };
 
 watch(
+  () => name.value,
+  () => {
+    if (name.value && name.value !== link.value.name) {
+      updateLink();
+    }
+  }
+);
+
+watch(
   () => url.value,
   () => {
     if (url.value && url.value !== link.value.url) {
@@ -721,8 +716,29 @@ watch(
 );
 
 watch(
+  () => selectedId.value,
+  () => {
+    if (selectedId.value) {
+      changeInput("isName", "editNameInput");
+      changeInput("isLink", "editLinkInput");
+    }
+  }
+);
+
+watch(
+  () => selectedStr.value,
+  () => {
+    if (selectedStr.value) {
+      changeInput("isName", "editNameInput");
+      changeInput("isLink", "editLinkInput");
+    }
+  }
+);
+
+watch(
   () => selectedLayout.value,
   () => {
+    console.log(selectedLayout.value);
     updateItemLayout();
   }
 );
@@ -738,11 +754,6 @@ watch(
 
 watch(
   () => data.value,
-  async () => await updateLinkImage()
-);
-
-watch(
-  () => thumbnaildata.value,
-  async () => await updateThumbnailLinkImage()
+  async () => await updateDigitalProductThumbnail()
 );
 </script>
