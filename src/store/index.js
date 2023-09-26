@@ -7,15 +7,17 @@ const store = createStore({
       id: "",
       uuid: "",
       currentplan: "",
-      userCategory: "",
       isAdmin: null,
+      page_font: "",
       theme_id: "",
       fullname: "",
       username: "",
+      page_layout: "",
       email: "",
       image: "",
       bio: "",
-      theme: null,
+      location: "",
+      creator_category: "",
       colors: null,
       isMailchimpAuthorized: false,
       isGooglesheetsAuthorized: false,
@@ -37,11 +39,21 @@ const store = createStore({
       loading: false,
       data: [],
     },
-    questionTypes: ["text", "select", "radio", "checkbox", "textarea"],
+    questionTypes: [
+      "text",
+      "select",
+      "radio",
+      "checkbox",
+      "input",
+      "textarea",
+      "email",
+      "date",
+    ],
 
     //guest
     guestpagedata: {
       loading: false,
+      themeId: "",
       data: [],
     },
 
@@ -79,18 +91,55 @@ const store = createStore({
         commit("setUser", data.user);
         commit("setIsAdmin", data.user.isAdmin);
         commit("setToken", data.token);
-
+        this.dispatch("getUserTheme");
         return data;
       });
+    },
+    async googleloginredirect({ commit }) {
+      let res = await axiosClient.get("/google-login").then(({ data }) => {
+        console.log(data);
+        return data;
+      });
+      return res;
+    },
+    async googlelogintoken({ commit }, code) {
+      let res = await axiosClient.post("/google-login-token", {
+        code: code,
+      });
+      console.log(res);
+      commit("setUser", res.data.user);
+      //commit("setIsAdmin", res.user.isAdmin);
+      commit("setToken", res.data.token);
+
+      this.dispatch("getUserTheme");
+      return res;
+    },
+    async verifyemailtoken({ commit }, code) {
+      return axiosClient
+        .post("/verify-email-token", { code: code })
+        .then(({ data }) => {
+          commit("setUser", data.user);
+          commit("setIsAdmin", data.user.isAdmin);
+          commit("setToken", data.token);
+          console.log(data.user);
+          this.dispatch("getUserTheme");
+          return data;
+        })
+        .catch((error) => {
+          console.log(error);
+          //throw error;
+          return error;
+        });
     },
     async register({ commit }, user) {
       return axiosClient
         .post("/register", user)
         .then(({ data }) => {
-          commit("setUser", data.user);
-          commit("setIsAdmin", data.user.isAdmin);
-          commit("setToken", data.token);
-
+          //commit("setUser", data.user);
+          //commit("setIsAdmin", data.user.isAdmin);
+          //commit("setToken", data.token);
+          //console.log(data.user);
+          //this.dispatch("getUserTheme");
           return data;
         })
         .catch((error) => {
@@ -107,25 +156,33 @@ const store = createStore({
         return response;
       });
     },
+    async saveUsername({ commit }, user) {
+      await axiosClient.post("/username", user).then(({ data }) => {
+        commit("setUser", data.user);
+        this.dispatch("getUserTheme");
+        return data;
+      });
+    },
     async getUser({ commit }) {
       return axiosClient.get("/user").then(({ data }) => {
         commit("setUser", data.data);
         //commit("setIsAdmin", data.user.isAdmin);
         //commit("setToken", data.token);
         console.log(data.data);
-        this.dispatch("getUserPage");
+        this.dispatch("getUserTheme");
 
         return data;
       });
     },
 
-    async getUserPage({ commit }) {
-      let res = await axiosClient.get("/page");
+    // async getUserPage({ commit }) {
+    //   let res = await axiosClient.get("/page");
 
-      commit("setThemeid", res);
+    //   commit("setThemeid", res);
 
-      this.dispatch("getUserTheme");
-    },
+    //   this.dispatch("getUserTheme");
+    //   return res;
+    // },
 
     getUserTheme({ state }) {
       state.user.colors.forEach((color) => {
@@ -141,19 +198,23 @@ const store = createStore({
       //let socialLinks = await axiosClient.get("/sociallinks");
 
       commit("setLinks", res);
+      return res;
       //this.$state.allLinks = res.data;
       //this.$state.socialLinks = socialLinks.data;
     },
 
     async addLink({ commit }, payload) {
       let res = await axiosClient.post("/links", payload);
+      return res;
     },
 
     async updateLink({ commit }, payload) {
       let res = await axiosClient.patch(`/links/${payload.id}`, {
         name: payload.name,
         description: payload.description,
+        category: payload.category,
         url: payload.url,
+        layout: payload.layout,
         active: payload.active,
       });
 
@@ -161,8 +222,9 @@ const store = createStore({
     },
 
     async deleteLink({ commit }, id) {
-      await axiosClient.delete(`/links/${id}`);
+      let res = await axiosClient.delete(`/links/${id}`);
       this.dispatch("getAllLinks");
+      return res;
     },
 
     async getAllSocialIcons({ commit }) {
@@ -173,30 +235,36 @@ const store = createStore({
 
     async addSocialIcon({ commit }, payload) {
       let res = await axiosClient.post("/socialicon", payload);
+      return res;
     },
 
     async updateSocialIcon({ commit }, payload) {
-      await axiosClient.patch(`/socialicon/${payload.id}`, {
+      let res = await axiosClient.patch(`/socialicon/${payload.id}`, {
         id: payload.id,
         url: payload.url,
         active: payload.active,
       });
+      return res;
     },
 
     async deleteSocialIcon({ commit }, payload) {
-      await axiosClient.post(`/socialicon/${payload.id}`, {
+      let res = await axiosClient.post(`/socialicon/${payload.id}`, {
         id: payload.id,
       });
       this.dispatch("getAllSocialIcons");
+      return res;
     },
 
     async updatePageDetails({ commit }, payload) {
-      await axiosClient.post(`/page/update`, {
+      let res = await axiosClient.post(`/page/update`, {
         username: payload.username,
         fullname: payload.fullname,
         bio: payload.bio,
+        location: payload.location,
+        creator_category: payload.creator_category,
         //userCategory: userCategory,
       });
+      return res;
     },
 
     async updateTheme({ state }, themeId) {
@@ -205,6 +273,11 @@ const store = createStore({
       });
       state.user.theme_id = res.data.theme_id;
       this.dispatch("getUserTheme");
+      return res;
+    },
+    async updatePage({ state }, payload) {
+      let res = await axiosClient.patch("/page/appearance", payload);
+      return res;
     },
 
     async fetchchartData(username) {
@@ -231,37 +304,52 @@ const store = createStore({
 
       return data;
     },
+    async fetchFormSummary({ state }, Id) {
+      let res = await axiosClient.post("/formsummary", {
+        form_id: Id,
+      });
+
+      return res;
+    },
 
     async updateUserImage({ commit }, data) {
-      await axiosClient.post("/user-image", data);
+      let res = await axiosClient.post("/user-image", data);
+      return res;
     },
 
     async updateLinkImage({ commit }, data) {
-      await axiosClient.post(`/link-image`, data);
+      let res = await axiosClient.post(`/link-image`, data);
+      return res;
     },
 
     async updateThumbnailLinkImage({ commit }, data) {
-      await axiosClient.post(`/link-thumbimage`, data);
+      let res = await axiosClient.post(`/link-thumbimage`, data);
+      return res;
     },
     async updatePortfolioThumbnail({ commit }, data) {
-      await axiosClient.post(`/link-portfoliothumbimage`, data);
+      let res = await axiosClient.post(`/link-portfoliothumbimage`, data);
+      return res;
     },
 
     async updateItemLayout({ commit }, payload) {
-      await axiosClient.post(`links/data/layout`, {
+      const res = await axiosClient.post(`links/data/layout`, {
         Layout: payload.Layout,
         link_id: payload.id,
       });
+
+      return res;
     },
     async updateStartupData({ commit }, payload) {
-      await axiosClient.post(`links/data/startup`, payload);
+      const res = await axiosClient.post(`links/data/startup`, payload);
+      return res;
     },
     async updateFormData({ commit }, payload) {
-      await axiosClient.post(`links/data/form`, payload);
+      let res = await axiosClient.post(`links/data/form`, payload);
+      return res;
     },
 
     async updateportfolioData({ commit }, payload) {
-      await axiosClient.post(`links/data/portfolio`, {
+      let res = await axiosClient.post(`links/data/portfolio`, {
         id: payload.id,
         title: payload.title,
         portfolio_blog: payload.portfolio_blog,
@@ -269,42 +357,47 @@ const store = createStore({
         category: payload.category,
         portfolio_thumbnail: payload.portfolio_thumbnail,
       });
+      return res;
     },
 
     async AddEcomItem({ commit }, payload) {
-      await axiosClient.post(`links/data/store/items`, {
+      let res = await axiosClient.post(`links/data/store/items`, {
         ecom_id: payload.ecom_id,
         price: payload.price,
         productname: payload.productname,
       });
+      return res;
     },
 
     async updateQuoteAlignment({ commit }, payload) {
-      await axiosClient.post(`links/data/quote`, {
+      let res = await axiosClient.post(`links/data/quote`, {
         id: payload.id,
         textAlignment: payload.textAlignment,
       });
+      return res;
     },
     async updateQuotePosition({ commit }, payload) {
-      await axiosClient.post(`links/data/quote`, {
+      let res = await axiosClient.post(`links/data/quote`, {
         id: payload.id,
 
         textPosition: payload.textPosition,
       });
+      return res;
     },
 
     async updateLinksOrder({ commit }, payload) {
-      await axiosClient.post(`links/order`, {
+      let res = await axiosClient.post(`links/order`, {
         payload: payload,
       });
       this.dispatch("getAllLinks");
+      return res;
     },
 
     async getPage({ commit }, linkname) {
       let res = await axiosClient.get(`/guestview/${linkname}`);
 
       commit("setGuestdata", res.data);
-      return;
+      return res;
     },
 
     async saveSurveyAnswer({ commit }, payload) {
@@ -349,6 +442,11 @@ const store = createStore({
       return res;
     },
 
+    async gotchYaFormViews({ commit }, payload) {
+      let res = await axiosClient.post(`formviewed`, payload);
+      return res;
+    },
+
     async triggerAnalytics({ commit }, username) {
       let data = await axiosClient.post("/analytics", {
         username: username,
@@ -372,9 +470,15 @@ const store = createStore({
     setUser: (state, user) => {
       console.log(user);
       state.user.id = user.id;
-      state.user.uuid = user.uuid;
+      state.user.uuid = user.id;
+      state.user.email = user.email;
+      state.user.location = user.location;
+      state.user.creator_category = user.creator_category;
       state.user.currentplan = user.currentplan;
-      state.user.userCategory = user.creator_category;
+
+      state.user.page_font = user.page_font;
+      state.user.page_layout = user.page_layout;
+      state.user.theme_id = user.theme_id;
       state.user.fullname = user.fullname;
       state.user.username = user.username;
       state.user.bio = user.bio;
@@ -425,6 +529,8 @@ const store = createStore({
     setGuestdata: (state, data) => {
       state.guestpagedata.loading = false;
       state.guestpagedata.data = data;
+      console.log(data);
+      state.guestpagedata.themeId = data.page.theme_id;
     },
 
     notify: (state, { message, type }) => {
@@ -442,6 +548,8 @@ const store = createStore({
       state.user.email = "";
       state.user.image = "";
       state.user.bio = "";
+      state.user.page_font = "";
+      state.user.page_layout = "";
       state.user.theme_id = "";
       state.user.theme = null;
       state.user.colors = null;

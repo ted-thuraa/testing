@@ -1,283 +1,310 @@
 <template>
-    <div class="w-full bg-white rounded-lg py-4 px-8 max-w-lg space-y-8">
-        <div class="flex flex-col items-center">
-            <a
-                href="/"
-                class="flex-shrink-0 inline-flex items-center text-xl py-2 font-bold text-gray-900"
-            >
-                <img
-                    class="h-8 w-8 mr-3"
-                    src="../assets/svg/logoblack.svg"
-                    alt="Your Company"
-                />
-                Rezmay
-            </a>
-            <h2
-                class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
-            >
-                Sign up
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                Have an account?
-                {{ " " }}
-                <router-link
-                    :to="{ name: 'Login' }"
-                    class="font-medium text-indigo-600 hover:text-indigo-500"
-                    >Login</router-link
-                >
-            </p>
-        </div>
-        <form class="mt-8 space-y-6" @submit.prevent="register">
-            <div v-if="errorMsg" class="px-8">
-                <div
-                    v-for="error in errorMsg"
-                    :key="error"
-                    id="toast-warning"
-                    class="flex items-center w-full p-4 text-gray-900 bg-gray-50 rounded-lg shadow"
-                    role="alert"
-                >
-                    <div
-                        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200"
-                    >
-                        <svg
-                            aria-hidden="true"
-                            class="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                clip-rule="evenodd"
-                            ></path>
-                        </svg>
-                        <span class="sr-only">Warning icon</span>
-                    </div>
-                    <div class="ml-3 text-sm font-normal">
-                        {{ error }}
-                    </div>
-                    <button
-                        @click="errorMsg = ''"
-                        type="button"
-                        class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-200 inline-flex h-8 w-8"
-                        data-dismiss-target="#toast-warning"
-                        aria-label="Close"
-                    >
-                        <span class="sr-only">Close</span>
-                        <svg
-                            aria-hidden="true"
-                            class="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <input type="hidden" name="remember" value="true" />
-            <div class="-space-y-px rounded-md shadow-sm">
-                <div>
-                    <label for="fullname" class="sr-only">Full name</label>
-                    <input
-                        type="text"
-                        v-model="user.username"
-                        name="username"
-                        id="username"
-                        required=""
-                        autocomplete="name"
-                        placeholder="name"
-                        class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                </div>
-                <div>
-                    <label for="email-address" class="sr-only"
-                        >Email address</label
-                    >
-                    <input
-                        v-model="user.email"
-                        type="email"
-                        name="email"
-                        autocomplete="email"
-                        required=""
-                        id="email"
-                        placeholder="exampleaddress"
-                        class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                </div>
-                <div>
-                    <label for="password" class="sr-only">Password</label>
-                    <input
-                        v-model="user.password"
-                        type="password"
-                        name="password"
-                        id="password"
-                        autocomplete="current-password"
-                        required=""
-                        placeholder="password"
-                        class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                </div>
-                <div>
-                    <label for="password" class="sr-only"
-                        >Confirm Password</label
-                    >
-                    <input
-                        type="password"
-                        v-model="user.password_confirmation"
-                        name="confirmPassword"
-                        id="confirmpassword"
-                        required=""
-                        autocomplete="current-password_confirm"
-                        placeholder="Confirm password"
-                        class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        v-model="user.remember"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
-                    <label
-                        for="remember-me"
-                        class="ml-2 block text-sm text-gray-900"
-                        >Remember me</label
-                    >
-                </div>
-
-                <div class="text-sm">
-                    <a
-                        href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500"
-                        >Forgot your password?</a
-                    >
-                </div>
-            </div>
-
-            <div>
-                <button
-                    v-if="!loading"
-                    type="submit"
-                    class="group relative flex w-full justify-center rounded-md bg-gray-900 px-3 py-3 text-sm font-semibold text-white hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                >
-                    <span
-                        class="absolute inset-y-0 left-0 flex items-center pl-3"
-                    >
-                        <LockClosedIcon
-                            class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                            aria-hidden="true"
-                        />
-                    </span>
-                    Sign in
-                </button>
-                <button
-                    v-else
-                    class="group relative flex w-full justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                >
-                    <svg
-                        class="animate-spin h-8 w-8 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <circle
-                            class="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            stroke-width="4"
-                        ></circle>
-                        <path
-                            class="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                    </svg>
-                </button>
-            </div>
-        </form>
+  <div class="w-full rounded-lg py-4 px- max-w-md">
+    <div class="flex flex-col items-center">
+      <h2
+        class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
+      >
+        Hi 👋, let’s get started!
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Have an account?
+        {{ " " }}
+        <router-link
+          :to="{ name: 'Login' }"
+          class="font-medium text-indigo-600 hover:text-indigo-500"
+          >Sign in</router-link
+        >
+      </p>
     </div>
+    <div class="mt-8 space-y-4" @submit.prevent="register">
+      <div class="stepper-content w-full">
+        <div class="stepper-pane flex flex-col justify-center" v-if="step == 1">
+          <div class="-space-y-px rounded-md shadow-sm">
+            <div class="w-full">
+              <label
+                for="input-group-1"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Username
+              </label>
+              <div class="relative mb-6">
+                <div class="w-full inline-flex items-center">
+                  <input
+                    type="text"
+                    v-model="user.username"
+                    name="username"
+                    id="username"
+                    required=""
+                    autocomplete="name"
+                    placeholder="name"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="w-full">
+              <label
+                for="input-group-1"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Email
+              </label>
+              <div class="relative mb-6">
+                <div class="w-full inline-flex items-center">
+                  <input
+                    v-model="user.email"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required=""
+                    id="email"
+                    placeholder="exampleaddress"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            @click="incrementStep"
+            class="group relative flex w-full justify-center rounded-[1.5rem] bg-purple-700 px-3 py-4 text-sm font-semibold text-white hover:bg-purple-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+          >
+            create account
+          </button>
+          <div class="my-4 flex items-center justify-center text-gray-600">
+            <span>or</span>
+          </div>
+          <button
+            @click="loginwithgoogle"
+            type="submit"
+            class="group relative inline-flex items-center w-full justify-center rounded-[1.5rem] bg-white border border-gray-100 px-3 py-4 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+              class="w-6 h-6 mr-4"
+            >
+              <path
+                fill="#FFC107"
+                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+              />
+              <path
+                fill="#FF3D00"
+                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+              />
+              <path
+                fill="#4CAF50"
+                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+              />
+              <path
+                fill="#1976D2"
+                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+              />
+            </svg>
+            <span> Sign up with google </span>
+          </button>
+        </div>
+        <div class="stepper-pane flex flex-col justify-center" v-if="step == 2">
+          <button
+            @click="decrementStep"
+            class="mb-4 bg-transparent inline-flex items-center text-purple-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              />
+            </svg>
+            <span class="font-bold">Back</span>
+          </button>
+          <div class="-space-y-px rounded-md">
+            <input type="hidden" name="remember" value="true" />
+            <div class="w-full">
+              <label
+                for="input-group-1"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Password</label
+              >
+              <div class="relative mb-6">
+                <div class="w-full inline-flex items-center">
+                  <input
+                    v-model="user.password"
+                    type="password"
+                    name="password"
+                    id="password"
+                    autocomplete="current-password"
+                    required=""
+                    placeholder="password"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="w-full">
+              <label
+                for="input-group-1"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Confirm Password</label
+              >
+              <div class="relative mb-6">
+                <div class="w-full inline-flex items-center">
+                  <input
+                    type="password"
+                    v-model="user.password_confirmation"
+                    name="confirmPassword"
+                    id="confirmpassword"
+                    required=""
+                    autocomplete="current-password_confirm"
+                    placeholder="Confirm password"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                v-model="user.remember"
+                class="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-600"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900"
+                >Remember me</label
+              >
+            </div>
+          </div>
+          <div>
+            <button
+              v-if="!loading"
+              @click="register"
+              type="submit"
+              class="group relative flex w-full justify-center rounded-[1.5rem] bg-purple-700 px-3 py-4 text-sm font-semibold text-white hover:bg-purple-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+            >
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <LockClosedIcon
+                  class="h-5 w-5 text-purple-500 group-hover:text-purple-400"
+                  aria-hidden="true"
+                />
+              </span>
+              Sign up
+            </button>
+            <button
+              v-else
+              type="submit"
+              class="group relative flex w-full justify-center rounded-[1.5rem] bg-purple-700 px-3 py-4 text-sm font-semibold text-white hover:bg-purple-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+            >
+              <svg
+                class="animate-spin h-8 w-8 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
+import EmailConfirmationModal from "../components/popovers/EmailConfirmationModal.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import store from "../store";
 
 const router = useRouter();
 let errorMsg = ref([]);
+let verificationemail = ref("");
+let isAccountcreated = ref(false);
 let loading = ref(false);
+const step = ref(1);
 
 const user = {
-    username: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
+  username: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
 };
 
 const register = async (ev) => {
-    loading.value = true;
-    errorMsg.value = null;
-    ev.preventDefault();
+  loading.value = true;
+  errorMsg.value = null;
+  ev.preventDefault();
 
-    try {
-        //await userStore.getTokens();
-        await store.dispatch("register", user);
-        await store.dispatch("getUser");
-        loading.value = false;
-        router.push({
-            name: "Dashboard",
-        });
-    } catch (error) {
-        console.log(error);
-        errorMsg.value = error.response.data.errors;
-    }
+  await store
+    .dispatch("register", user)
+    .then((data) => {
+      console.log(data);
+      loading.value = false;
+      router.push({
+        path: `/verify/email?email=${data.email}`,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      loading.value = false;
+      if (error.response.data.errors) {
+        errorMsg.value = error.response.data.message;
+      } else {
+        errorMsg.value = error.response.data.error;
+      }
+    });
 };
 
-// async function register(ev) {
-//     loading.value = true;
-//     errorMsg.value = null;
-//     ev.preventDefault();
-//     //send to store for some action
-//     await store.dispatch("register", user).then((res) => {
-//         console.log(res);
-//         //navigate user to dashboard
-//         loading.value = false;
-//         if (res && res.user) {
-//             store.dispatch("getUser");
-//             router.push({
-//                 name: "Dashboard",
-//             });
-//         } else if (res && res.response.status == 422) {
-//             const response = res.response;
-//             if (response.data.errors) {
-//                 const errors = response.data.errors;
-//                 for (const key in errors) {
-//                     // Do something with each error object
-//                     console.log(errors[key]);
-//                     errorMsg.value = errors[key];
-//                 }
-//             } else if (response.data.error.length > 0) {
-//                 console.log(response.data.error);
-//                 errorMsg.value = response.data.error;
-//                 //errorMsg.value = response.data.error;
-//             }
-//         }
-//     });
-// }
+const loginwithgoogle = async (ev) => {
+  loading.value = true;
+  errorMsg.value = null;
+  ev.preventDefault();
+
+  try {
+    //await userStore.getTokens();
+    let res = await store.dispatch("googleloginredirect");
+    console.log(res);
+    window.location.href = res;
+  } catch (error) {
+    console.log(error);
+    errorMsg.value = error.response.data.errors;
+  }
+};
+
+const incrementStep = () => {
+  //formStarted.value = true;
+
+  if (step.value < 2) {
+    step.value++;
+    //answers.value.push(answers_data.value);
+  }
+};
+
+const decrementStep = () => {
+  if (step.value > 1) {
+    step.value--;
+  }
+};
 </script>
 
 <style></style>

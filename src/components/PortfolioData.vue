@@ -34,9 +34,29 @@
         </div>
 
         <button
+          v-if="saving"
+          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
+        >
+          <div class="m-auto text-gray-200">
+            <!-- Animation Snippet -->
+            <div>
+              <span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash"
+              ></span
+              ><span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.2s]"
+              ></span
+              ><span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.4s]"
+              ></span>
+            </div>
+          </div>
+        </button>
+        <button
+          v-else
           type="submit"
           @click="updateportfolioBlog"
-          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-gray-800 hover:bg-gray-950"
+          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
         >
           <span>Save</span>
         </button>
@@ -65,6 +85,7 @@ let portfolio_blog = ref("");
 let portfolio_tags = ref("");
 let category = ref("");
 let portfolio_thumbnail = ref("");
+let saving = ref(false);
 let errors = ref(null);
 
 const updateportfolioData = async ($event) => {
@@ -74,6 +95,7 @@ const updateportfolioData = async ($event) => {
   console.log(portfolio_blog.value);
 };
 const updateportfolioBlog = async ($event) => {
+  saving.value = true;
   errors.value = null;
 
   model.value.data = {
@@ -88,22 +110,33 @@ const updateportfolioBlog = async ($event) => {
     console.log($event.data);
     console.log(link.value.id);
 
-    await store.dispatch("updateStartupData", model.value);
+    await store.dispatch("updateStartupData", model.value).then(({ data }) => {
+      store.commit("notify", {
+        type: "success",
+        message: "Saved",
+      });
+    });
     await store.dispatch("getAllLinks");
+    saving.value = false;
   } catch (error) {
+    saving.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     console.log(error);
     //errors.value = error.response.data.errors;
   }
 };
 
 onMounted(async () => {
-  console.log(link.value.portfolio_data);
   portfolio_blog.value = props.link.data?.portfolio_blog || "";
   title.value = props.link.data?.title || "";
   portfolio_tags.value = props.link.data?.portfolio_tags || "";
   category.value = props.link.data?.category || "";
   portfolio_thumbnail.value = props.link.data?.portfolio_thumbnail || "";
 });
+console.log(portfolio_blog.value);
 </script>
 
 <style></style>

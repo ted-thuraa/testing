@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="store.state.user.theme"
-    class="md:block fixed hidden right-0 lg:w-[460px] w-[310px] h-[calc(100%-20px)] mt-[20px] mx-auto border-l-gray-300 pt-10"
+    class="md:block fixed hidden top-10 right-0 lg:w-[460px] w-[310px] h-[calc(100%-20px)] mt-[10px] mx-auto border-l-gray-300 pt-2"
   >
     <div
       class="mx-auto mt-16 mb-16 flex items-center justify-center w-full lg:max-w-[230px] max-w-[200px] lg:h-[460px] h-[400px] p-3 rounded-3xl relative"
@@ -21,46 +21,13 @@
           <div class="camera"></div>
           <div class="screen-container">
             <div class="bg">
-              <div class="contenttt" :class="store.state.user.theme.color">
+              <div class="contenttt" :class="store.state.user.theme.pageBg">
                 <div class="content_inner">
-                  <!-- <div
-                      class="w-full h-full absolute rounded-3xl z-0"
-                      :class="userStore.theme.color"
-                    /> -->
+                  <div class="w-full h-screen">
+                    <PreviewPage />
+                  </div>
                 </div>
               </div>
-              <!-- <div class="deep-purple">
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-            </div>
-            <div class="gold">
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-            </div>
-            <div class="space-black">
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-            </div>
-            <div class="silver">
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-              <div class="section">
-                <div class="glow"></div>
-              </div>
-            </div> -->
             </div>
             <div class="notch-container" tabindex="0">
               <div class="notch">
@@ -85,7 +52,12 @@
 </template>
 
 <script setup>
+import Temp1 from "./PagePreview/Temp1.vue";
+import PreviewPage from "./PreviewPage.vue";
+import { ref, watch, computed, onMounted, isProxy, toRaw, toRefs } from "vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
+
 const store = useStore();
 </script>
 
@@ -120,8 +92,8 @@ const store = useStore();
 }
 .content_inner {
   position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* overflow-y: auto; */
+  /* overflow-x: hidden; */
   height: 100%;
 }
 .content_item {
@@ -135,9 +107,9 @@ const store = useStore();
 .phone {
   position: relative;
   z-index: 1;
-  aspect-ratio: 37/76;
+  aspect-ratio: 42/80;
   background: black;
-  height: var(--heght);
+  height: 82em;
   border-radius: var(--border-radius);
   box-shadow: 0 0 0.1em 0.25em hsl(var(--c-h), 20%, 25%),
     0 0 0 var(--border-width) hsl(var(--c-h), 30%, 85%);

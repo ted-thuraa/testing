@@ -1,12 +1,25 @@
 <template>
-  <div id="AddLink" class="w-full bg-gray-900 rounded-3xl overflow-hidden">
+  <div id="AddLink" class="w-full bg-[#FFCA7B] rounded-3xl overflow-hidden">
     <div class="flex items-center justify-between pb-2 p-6">
-      <div class="text-[19px] font-semibold text-white">Enter URL</div>
+      <div class="text-[19px] font-semibold text-gray-900">Enter URL</div>
       <button
         @click="$emit('close')"
         class="flex items-center rounded-full p-1.5 hover:bg-[#EFF0EA]"
       >
-        <Icon name="mdi:close" size="20" color="#676B5F" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 text-gray-900"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
       </button>
     </div>
 
@@ -36,16 +49,34 @@
       </div>
 
       <button
+        v-if="!loading"
         type="submit"
         :disabled="!url"
-        class="rounded-full p-3 px-6"
+        class="rounded-full p-3 px-2 w-28"
         :class="
           url
-            ? 'bg-[#8228D9] hover:bg-[#6c21b3] text-white'
+            ? 'bg-purple-700 hover:bg-purple-800 text-white'
             : 'bg-[#EFF0EA] text-[#A7AAA2]'
         "
       >
         Add
+      </button>
+      <button
+        v-else
+        type="submit"
+        class="rounded-full m-auto p-3 px-2 w-28 bg-purple-700 text-white"
+      >
+        <div>
+          <span
+            class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash"
+          ></span
+          ><span
+            class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.2s]"
+          ></span
+          ><span
+            class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.4s]"
+          ></span>
+        </div>
       </button>
     </form>
   </div>
@@ -62,6 +93,7 @@ const props = defineProps({
 const { category } = toRefs(props);
 
 const emit = defineEmits(["close"]);
+let loading = ref(false);
 
 let model = ref({
   name: "",
@@ -86,18 +118,25 @@ let url = ref("");
 let errors = ref(null);
 
 const addLink = async () => {
+  loading.value = true;
   try {
     console.log(category.value);
     model.value.category = category.value;
     model.value.url = url.value;
     await store.dispatch("addLink", model.value);
     await store.dispatch("getAllLinks");
+    loading.value = false;
     setTimeout(() => {
       emit("close");
       name.value = "";
       url.value = "";
     }, 100);
   } catch (error) {
+    loading.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     console.log(error);
     errors.value = error.response.data.errors;
   }

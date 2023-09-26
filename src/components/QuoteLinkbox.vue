@@ -2,6 +2,7 @@
   <div class="w-full card-light-shadow rounded-3xl flex flex-row flex-nowrap">
     <div class="flex items-center px-2">
       <svg
+        class="handle cursor-grab"
         width="14"
         height="16"
         viewBox="0 0 14 16"
@@ -36,31 +37,32 @@
         <div>
           <div class="">
             <span
-              class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Text</span
+              class="px-3 py-[1px] rounded-[1rem] bg-amber-300/20 text-xs font-medium text-amber-600/70"
+              >Text</span
             >
           </div>
         </div>
         <div class="">
           <div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label
+              class="relative inline-flex items-center mb-5 cursor-pointer"
+            >
               <input
+                type="checkbox"
                 v-model="isActive"
                 @change="updateLink"
-                type="checkbox"
                 value="true"
                 class="sr-only peer"
-                checked
               />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"
               ></div>
             </label>
           </div>
         </div>
       </div>
       <div :id="`LinkBox${link.id}`" class="w-full">
-        <div id="MainLinkBoxSection" class="relative px-8 pt-2 pb-14">
+        <div id="MainLinkBoxSection" class="relative md:px-8 pt-2 pb-14">
           <div class="">
             <!-- <label for="Title" class="text-sm leading-6 text-gray-600"
                   >Title</label
@@ -79,7 +81,7 @@
                 v-model="text"
                 @change="updateLink"
                 id="input-group-1"
-                class="inputs w-full h-[8rem] bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
+                class="inputs w-full h-min bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
                 placeholder="Quote/Text"
               ></textarea>
             </div>
@@ -307,7 +309,7 @@
           class="overflow-hidden"
           :class="[
             {
-              'max-h-[180px] transition-all duration-300 ease-in mt-10':
+              'max-h-[220px] transition-all duration-300 ease-in mt-10':
                 isUpdateLayout,
             },
             {
@@ -342,39 +344,213 @@
             <form @submit.prevent="updateCategory()">
               <!-- Sizes -->
               <div class="mt-10">
-                <RadioGroup v-model="selectedLayout" class="mt-4">
+                <RadioGroup
+                  v-model="layout"
+                  @update:modelValue="(value) => updateLink()"
+                  class="mt-4"
+                >
                   <RadioGroupLabel class="sr-only"
-                    >Choose a size</RadioGroupLabel
+                    >Choose a layout</RadioGroupLabel
                   >
                   <div
-                    class="flex flex-row flex-wrap items-center justify-center"
+                    class="mt-3 flex flex-row flex-nowrap items-center justify-between"
                   >
                     <RadioGroupOption
-                      as="template"
-                      v-for="size in Layout"
-                      :key="size.name"
-                      :value="size.name"
+                      as="div"
+                      value="Cube"
                       v-slot="{ active, checked }"
-                      class="min-w-[100px]"
+                      class=""
                     >
                       <div
-                        :class="[
-                          active ? ' bg-gray-950 text-white' : 'text-gray-950',
-                          'group  relative flex items-center justify-center  w-auto mb-3 rounded-full  py-0.5 px-1 text-sm font-medium hover:bg-gray-50 focus:outline-none ',
-                        ]"
+                        class="relative px-6 py-5 bg-gray-200 p-2 rounded-lg"
+                        :class="[checked ? 'border-2 border-purple-700' : '']"
                       >
-                        <span v-html="size.icon" />
-
-                        <!-- <span
-                                            :class="[
-                                                active ? 'border' : 'border-2',
-                                                checked
-                                                    ? ''
-                                                    : 'border-transparent',
-                                                'pointer-events-none absolute -inset-px rounded-full',
-                                            ]"
-                                            aria-hidden="true"
-                                        /> -->
+                        <div class="absolute top-0 left-0">
+                          <div
+                            class="p-1 text-purple-700"
+                            :class="[checked ? 'flex items-center' : ' hidden']"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="2.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div
+                          class="w-[60px] bg-white h-auto rounded-[0.8rem] p-2 flex flex-col"
+                        >
+                          <div
+                            class="mb-2 bg-gray-200 rounded-[1rem] w-2 h-2"
+                          ></div>
+                          <div
+                            class="mb-2 bg-gray-200 rounded-[1rem] w-10 h-1.5"
+                          ></div>
+                          <div
+                            class="mb-2 bg-gray-200 rounded-[1rem] w-8 h-1"
+                          ></div>
+                        </div>
+                      </div>
+                    </RadioGroupOption>
+                    <RadioGroupOption
+                      as="div"
+                      value="Verticalbar"
+                      v-slot="{ active, checked }"
+                      class=""
+                    >
+                      <div
+                        class="relative px-2 py-8 bg-gray-200 rounded-lg flex items-center"
+                        :class="[checked ? 'border-2 border-purple-700' : '']"
+                      >
+                        <div class="absolute top-0 left-0">
+                          <div
+                            class="p-1 text-purple-700"
+                            :class="[checked ? 'flex items-center' : ' hidden']"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="2.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="bg-white rounded-[2rem] p-2 flex flex-row">
+                          <div
+                            class="mr-2 bg-gray-200 rounded-[1rem] w-4 h-4"
+                          ></div>
+                          <div class="mr-[2.5rem] flex flex-col">
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-10 h-1.5"
+                            ></div>
+                            <div
+                              class="bg-gray-200 rounded-[1rem] w-8 h-1"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </RadioGroupOption>
+                    <RadioGroupOption
+                      as="div"
+                      value="Horizontalbar"
+                      v-slot="{ active, checked }"
+                      class=""
+                    >
+                      <div
+                        class="relative px-2 py-5 bg-gray-200 p-2 rounded-lg mr-1"
+                        :class="[checked ? 'border-2 border-purple-700' : '']"
+                      >
+                        <div class="absolute top-0 left-0">
+                          <div
+                            class="p-1 text-purple-700"
+                            :class="[checked ? 'flex items-center' : ' hidden']"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="2.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div
+                          class="bg-white w-auto h-auto rounded-[0.6rem] p-2 flex flex-row"
+                        >
+                          <div class="flex flex-col">
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-4 h-4"
+                            ></div>
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-10 h-1.5"
+                            ></div>
+                            <div
+                              class="bg-gray-200 rounded-[1rem] w-8 h-1.5"
+                            ></div>
+                          </div>
+                          <div class="ml-1 p-0.5">
+                            <div
+                              class="bg-gray-200 rounded-[0.3rem] w-[50px] h-[40px]"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </RadioGroupOption>
+                    <RadioGroupOption
+                      as="div"
+                      value="Block"
+                      v-slot="{ active, checked }"
+                      class=""
+                    >
+                      <div
+                        class="relative px-2 py-2 bg-gray-200 p-2 rounded-lg mr-1"
+                        :class="[checked ? 'border-2 border-purple-700' : '']"
+                      >
+                        <div class="absolute top-0 left-0">
+                          <div
+                            class="p-1 text-purple-700"
+                            :class="[checked ? 'flex items-center' : ' hidden']"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="2.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div
+                          class="bg-white w-auto h-auto rounded-[1rem] p-2 flex flex-col"
+                        >
+                          <div class="flex flex-col">
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-4 h-4"
+                            ></div>
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-10 h-1.5"
+                            ></div>
+                            <div
+                              class="mb-1 bg-gray-200 rounded-[1rem] w-8 h-1"
+                            ></div>
+                          </div>
+                          <div class="">
+                            <div
+                              class="bg-gray-200 rounded-[0.3rem] w-[80px] h-[30px]"
+                            ></div>
+                          </div>
+                        </div>
                       </div>
                     </RadioGroupOption>
                   </div>
@@ -426,98 +602,232 @@
               More options
             </div>
           </div>
+          <div class="px-6">
+            <div class="mt-10 w-[14rem]">
+              <label
+                for="username"
+                class="text-sm font-medium leading-7 text-gray-900"
+                >Font</label
+              >
+              <div class="mt-2 text-gray-900">
+                <Listbox
+                  v-model="font"
+                  @update:modelValue="(value) => dataChange()"
+                >
+                  <div class="relative mt-1">
+                    <ListboxButton
+                      class="relative w-full min-h-[40px] cursor-default rounded-lg bg-gray-50 py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                    >
+                      <span class="block truncate">{{ font }}</span>
+                      <span
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+                      >
+                        <ChevronUpDownIcon
+                          class="h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </ListboxButton>
 
-          <div class="w-full flex flex-row px-4 py-5">
-            <form @submit.prevent="updateCategory()">
-              <!-- text position -->
-              <div class="mt-10">
-                <RadioGroup v-model="selectedTextAlign" class="mt-4">
+                    <transition
+                      leave-active-class="transition duration-100 ease-in"
+                      leave-from-class="opacity-100"
+                      leave-to-class="opacity-0"
+                    >
+                      <ListboxOptions
+                        class="absolute z-[1] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                      >
+                        <ListboxOption
+                          v-slot="{ active, selected }"
+                          v-for="font in fonts"
+                          :key="font.name"
+                          :value="font.name"
+                          as="template"
+                        >
+                          <li
+                            :class="[
+                              active
+                                ? 'bg-amber-100 text-amber-900'
+                                : 'text-gray-900',
+                              'relative cursor-default select-none py-2 pl-10 pr-4',
+                            ]"
+                          >
+                            <span
+                              :class="[
+                                selected ? 'font-medium' : 'font-normal',
+                                'block truncate',
+                              ]"
+                              >{{ font.name }}</span
+                            >
+                            <span
+                              v-if="selected"
+                              class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600"
+                            >
+                              <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          </li>
+                        </ListboxOption>
+                      </ListboxOptions>
+                    </transition>
+                  </div>
+                </Listbox>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label
+                for="position"
+                class="text-sm font-medium leading-7 text-gray-900"
+                >text position</label
+              >
+              <div
+                class="w-full flex items-center flex-row flex-wrap px-4 py-2"
+              >
+                <div class="w-full">
+                  <!-- text position -->
+                  <div class="text-black">
+                    <RadioGroup
+                      v-model="selectedTextAlign"
+                      @update:modelValue="(value) => dataChange()"
+                      class=""
+                    >
+                      <RadioGroupLabel class="sr-only"
+                        >Choose a size</RadioGroupLabel
+                      >
+                      <div class="flex flex-row items-center">
+                        <RadioGroupOption
+                          as="template"
+                          v-for="position in textAlign"
+                          :key="position.name"
+                          :value="position.name"
+                          v-slot="{ active, checked }"
+                          class="min-w-[80px]"
+                        >
+                          <div
+                            :class="[
+                              active
+                                ? 'bg-purple-700 text-white'
+                                : 'text-gray-950',
+                              checked
+                                ? 'bg-purple-700 text-white'
+                                : 'border-transparent',
+                              'group relative flex items-center justify-center  w-auto mb-3 rounded-full  py-1 px-0.5 text-sm font-medium  focus:outline-none sm:flex-1',
+                            ]"
+                          >
+                            <span v-html="position.icon" />
+
+                            <span
+                              :class="[
+                                active ? '' : '',
+                                checked ? '' : 'border-transparent',
+                                'pointer-events-none absolute -inset-px rounded-full',
+                              ]"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </RadioGroupOption>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+                <div class="w-full">
+                  <!-- text position -->
+                  <div class="text-black">
+                    <RadioGroup
+                      v-model="selectedTextPosition"
+                      @update:modelValue="(value) => dataChange()"
+                      class=""
+                    >
+                      <RadioGroupLabel class="sr-only"
+                        >Choose a size</RadioGroupLabel
+                      >
+                      <div class="flex flex-row flex-wrap items-center">
+                        <RadioGroupOption
+                          as="template"
+                          v-for="position in position"
+                          :key="position"
+                          :value="position.name"
+                          v-slot="{ active, checked }"
+                          class="min-w-[80px]"
+                        >
+                          <div
+                            :class="[
+                              active
+                                ? 'bg-purple-700 text-white'
+                                : 'text-gray-950',
+                              checked
+                                ? 'bg-purple-700 text-white'
+                                : 'border-transparent',
+                              'group relative flex items-center justify-center  w-auto mb-3 rounded-full  py-1 px-0.5 text-sm font-medium focus:outline-none sm:flex-1',
+                            ]"
+                          >
+                            <span v-html="position.icon" />
+
+                            <span
+                              :class="[
+                                active ? '' : '',
+                                checked ? '' : 'border-transparent',
+                                'pointer-events-none absolute -inset-px rounded-full',
+                              ]"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </RadioGroupOption>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 mb-8 text-black">
+              <label
+                for="bgcolor"
+                class="text-sm font-medium leading-7 text-gray-900"
+                >Background Color</label
+              >
+
+              <div class="w-full px-4">
+                <RadioGroup
+                  v-model="bgColor"
+                  @update:modelValue="(value) => dataChange()"
+                  class="my-4"
+                >
                   <RadioGroupLabel class="sr-only"
-                    >Choose a size</RadioGroupLabel
+                    >Choose a color</RadioGroupLabel
                   >
-                  <div class="flex flex-row flex-wrap">
+                  <span
+                    class="flex flex-row flex-wrap items-center space-x-3 space-y-2"
+                  >
                     <RadioGroupOption
                       as="template"
-                      v-for="position in textAlign"
-                      :key="position.name"
-                      :value="position.name"
+                      v-for="color in colors"
+                      :key="color.name"
+                      :value="color.class"
                       v-slot="{ active, checked }"
-                      class="min-w-[80px]"
                     >
                       <div
+                        class="ring-purple-700"
                         :class="[
-                          active ? 'bg-gray-950 text-white' : 'text-gray-950',
-                          'group relative flex items-center justify-center mr-4 w-auto mb-3 rounded-full  py-0.5 px-1 text-sm font-medium hover:bg-gray-50 focus:outline-none sm:flex-1',
+                          active && checked ? 'ring ring-offset-1' : '',
+                          !active && checked ? 'ring-2' : '',
+                          'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none',
                         ]"
                       >
-                        <span v-html="position.icon" />
-
+                        <RadioGroupLabel as="span" class="sr-only">{{
+                          color.name
+                        }}</RadioGroupLabel>
                         <span
-                          :class="[
-                            active ? '' : '',
-                            checked ? '' : 'border-transparent',
-                            'pointer-events-none absolute -inset-px rounded-full',
-                          ]"
                           aria-hidden="true"
+                          :class="[
+                            color.class,
+                            'h-8 w-8 rounded-full border border-black border-opacity-10',
+                          ]"
                         />
                       </div>
                     </RadioGroupOption>
-                  </div>
+                  </span>
                 </RadioGroup>
               </div>
-
-              <!-- <button
-                        type="submit"
-                        class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Save
-                    </button> -->
-            </form>
-            <form @submit.prevent="updateCategory()">
-              <!-- text position -->
-              <div class="mt-10">
-                <RadioGroup v-model="selectedTextPosition" class="mt-4">
-                  <RadioGroupLabel class="sr-only"
-                    >Choose a size</RadioGroupLabel
-                  >
-                  <div class="flex flex-row flex-wrap">
-                    <RadioGroupOption
-                      as="template"
-                      v-for="position in Align"
-                      :key="position.name"
-                      :value="position.name"
-                      v-slot="{ active, checked }"
-                      class="min-w-[80px]"
-                    >
-                      <div
-                        :class="[
-                          active ? 'bg-gray-950 text-white' : 'text-gray-950',
-                          'group relative flex items-center justify-center mr-4 w-auto mb-3 rounded-full  py-0.5 px-1 text-sm font-medium hover:bg-gray-50 focus:outline-none sm:flex-1',
-                        ]"
-                      >
-                        <span v-html="position.icon" />
-
-                        <span
-                          :class="[
-                            active ? '' : '',
-                            checked ? '' : 'border-transparent',
-                            'pointer-events-none absolute -inset-px rounded-full',
-                          ]"
-                          aria-hidden="true"
-                        />
-                      </div>
-                    </RadioGroupOption>
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <!-- <button
-                        type="submit"
-                        class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Save
-                    </button> -->
-            </form>
+            </div>
           </div>
         </div>
 
@@ -533,6 +843,14 @@
 </template>
 
 <script setup>
+import {
+  Listbox,
+  ListboxLabel,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import {
   TransitionRoot,
   TransitionChild,
@@ -551,17 +869,20 @@ const store = useStore();
 
 const props = defineProps({
   link: Object,
-  selectedId: { type: Number, default: 0 },
-  selectedStr: { type: String, default: "" },
 });
-const { link, selectedId, selectedStr } = toRefs(props);
+const { link } = toRefs(props);
+const model = ref(JSON.parse(JSON.stringify(props.link)));
 
 const emit = defineEmits(["updatedInput"]);
 
 let name = ref("");
 let text = ref("");
 let url = ref("");
+let layout = ref("");
 let data = ref(null);
+let font = ref("");
+let bgColor = ref("");
+
 let isActive = ref(false);
 let isDelete = ref(false);
 let openCropper = ref(false);
@@ -569,6 +890,32 @@ let isEmbbedLink = ref(false);
 let isUpdateLayout = ref(false);
 let isMoreOption = ref(false);
 let errors = ref(null);
+
+const fonts = [
+  {
+    name: "Courgette",
+  },
+  {
+    name: "Dancing Script",
+  },
+  {
+    name: "Fredoka",
+  },
+  {
+    name: "Pacifico",
+  },
+];
+
+const colors = [
+  { name: "White", class: "bg-white" },
+  { name: "Gray", class: "bg-gray-200" },
+  { name: "Black", class: "bg-gray-900" },
+  { name: "brown", class: "bg-[#FEC86E]" },
+  { name: "redish", class: "bg-[#FD9A71]" },
+  { name: "greenish", class: "bg-[#E2EE8C]" },
+  { name: "purplish", class: "bg-[#B291FA]" },
+  { name: "bluish", class: "bg-[#00D3FB]" },
+];
 
 const Layout = [
   {
@@ -693,7 +1040,6 @@ const textAlign = [
   },
   {
     name: "right",
-
     icon: `
         <svg
                             class=""
@@ -714,10 +1060,9 @@ const textAlign = [
       `,
   },
 ];
-const Align = [
+const position = [
   {
     name: "top",
-
     icon: `
         <svg
                             class=""
@@ -786,23 +1131,31 @@ const Align = [
   },
 ];
 
-const selectedTextAlign = ref(textAlign[0]);
-const selectedTextPosition = ref(Align[0]);
+const selectedTextAlign = ref(textAlign[0].name);
+const selectedTextPosition = ref(position[0].name);
+console.log(position[0].name);
 
 onMounted(() => {
   name.value = link.value.name;
   text.value = link.value.description;
   url.value = link.value.url;
+  layout.value = link.value.layout;
   isActive.value = link.value.active ? true : false;
+  font.value = props.link.data?.font || "";
+  bgColor.value = props.link.data?.background_color || "";
+  selectedLayout.value.name = props.link.data?.Layout || "";
+  selectedTextAlign.value = props.link.data?.textAlignment || "";
+  selectedTextPosition.value = props.link.data?.textPosition || "";
 });
 
-const updateLink = debounce(async () => {
+const updateLink = async () => {
   try {
     await store.dispatch("updateLink", {
       id: link.value.id,
       name: name.value,
       description: text.value,
       url: url.value,
+      layout: layout.value,
       active: isActive.value,
     });
     await store.dispatch("getAllLinks");
@@ -810,43 +1163,23 @@ const updateLink = debounce(async () => {
     console.log(error);
     errors.value = error.response.data.errors;
   }
-}, 500);
-
-const changeInput = (str, linkIdNameString) => {
-  if (selectedId.value == link.value.id && selectedStr.value == str) {
-    setTimeout(() => {
-      document.getElementById(`${linkIdNameString}-${link.value.id}`).focus();
-      return;
-    }, 100);
-  }
 };
 
-const editName = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isName") {
-    return true;
-  }
-  return false;
-};
+const dataChange = async () => {
+  model.value.data = {
+    font: font.value,
+    background_color: bgColor.value,
+    Layout: selectedLayout.value.name,
+    textAlignment: selectedTextAlign.value,
+    textPosition: selectedTextPosition.value,
+  };
+  console.log(model.value.data);
 
-const editLink = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isLink") {
-    return true;
-  }
-  return false;
-};
-
-const editImage = () => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = link.value.id;
-  } else {
-    isEmbbedLink.value = true;
-    isDelete.value = false;
+  try {
+    await store.dispatch("updateStartupData", model.value);
+    await store.dispatch("getAllLinks");
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -912,45 +1245,6 @@ const deleteLink = async () => {
     console.log(error);
   }
 };
-
-watch(
-  () => name.value,
-  () => {
-    if (name.value && name.value !== link.value.name) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => url.value,
-  () => {
-    if (url.value && url.value !== link.value.url) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => selectedLayout.value,
-  () => {
-    updateItemLayout();
-  }
-);
-
-watch(
-  () => selectedTextAlign.value,
-  () => {
-    updateQuoteAlignment();
-  }
-);
-
-watch(
-  () => selectedTextPosition.value,
-  () => {
-    updateQuotePosition();
-  }
-);
 
 watch(
   () => store.state.user.updatedLinkId.value,

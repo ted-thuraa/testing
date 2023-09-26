@@ -2,6 +2,7 @@
   <div class="w-full card-light-shadow rounded-3xl flex flex-row flex-nowrap">
     <div class="flex items-center px-2">
       <svg
+        class="handle"
         width="14"
         height="16"
         viewBox="0 0 14 16"
@@ -36,31 +37,32 @@
         <div>
           <div class="">
             <span
-              class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Startup</span
+              class="px-1 py-[1px] rounded-[1rem] bg-amber-300/20 text-xs font-medium text-amber-600/70"
+              >Startup/store/blog</span
             >
           </div>
         </div>
         <div class="">
           <div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label
+              class="relative inline-flex items-center mb-5 cursor-pointer"
+            >
               <input
+                type="checkbox"
                 v-model="isActive"
                 @change="updateLink"
-                type="checkbox"
                 value="true"
                 class="sr-only peer"
-                checked
               />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-400"
+                class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"
               ></div>
             </label>
           </div>
         </div>
       </div>
       <div :id="`LinkBox${link.id}`" class="w-full">
-        <div id="MainLinkBoxSection" class="relative px-8 pt-2 pb-14">
+        <div id="MainLinkBoxSection" class="relative md:px-8 pt-2 pb-14">
           <div class="">
             <!-- <label for="Title" class="text-sm leading-6 text-gray-600"
                   >Title</label
@@ -320,30 +322,103 @@
             </div>
           </div>
 
-          <div class="w-full flex items-center justify-between px-4 py-5">
-            <img class="rounded-lg w-[80px] aspect-square" :src="link.image" />
+          <div class="w-full flex items-center justify-between px-4 py-3">
+            <div class="w-[50%]">
+              <div class="w-[60px] flex items-center p-3 bg-gray-50 rounded-lg">
+                <!-- https://sitegpt.ai/images/logo.svg -->
+                <div v-if="link.image">
+                  <img
+                    class="rounded-lg w-[60px] aspect-square shadow-lg"
+                    :src="link.image"
+                  />
+                </div>
+                <div v-else-if="!link.image && link.faviconurl">
+                  <img
+                    class="rounded-lg w-[60px] aspect-square shadow-lg"
+                    :src="link.faviconurl"
+                  />
+                </div>
+
+                <div
+                  v-else-if="!link.image && !link.faviconurl"
+                  class="rounded-2xl shadow-lg bg-gray-200 p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="rounded-lg text-gray-600 w-[35px]"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
 
             <div class="w-full pl-3">
               <button
                 @click="openCropper = true"
-                class="flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
+                class="flex items-center justify-center w-[80%] py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
               >
-                Change Icon
+                <span v-if="!link.faviconurl && !link.image">Choose Icon</span>
+                <span v-else>Change Icon</span>
               </button>
             </div>
           </div>
-          <div class="w-full flex items-center justify-between px-4 py-5">
-            <img
-              class="rounded-lg w-[80px] aspect-square"
-              :src="link.thumbnailimage"
-            />
+          <div class="w-full flex items-center justify-between px-4 py-2">
+            <div class="w-[50%]">
+              <div
+                class="flex items-center w-[180px] p-3 bg-gray-50 rounded-lg"
+              >
+                <!-- https://sitegpt.ai/images/og-image.png -->
+                <img
+                  v-if="link.thumbnailimage"
+                  class="rounded-lg w-[280px] h-[80px] aspect-square object-cover shadow-lg"
+                  :src="link.thumbnailimage"
+                />
+                <img
+                  v-if="!link.thumbnailimage && link.thumbnailurl"
+                  class="rounded-lg w-[280px] h-[80px] aspect-square object-cover shadow-lg"
+                  :src="link.thumbnailurl"
+                />
+
+                <div
+                  v-if="!link.thumbnailurl && !link.thumbnailimage"
+                  class="rounded-2xl shadow-lg bg-gray-100 p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="rounded-lg text-gray-600 w-[120px] h-[80px]"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
 
             <div class="w-full pl-3">
               <button
                 @click="openThumbnailCropper = true"
-                class="flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
+                class="flex items-center justify-center w-[80%] py-3 rounded-full text-white font-semibold bg-[#8228D9] hover:bg-[#6c21b3] mb-2"
               >
-                Change Thumbnail
+                <span v-if="!link.thumbnailurl && !link.thumbnailimage"
+                  >Choose Thumbnail</span
+                >
+                <span v-else>Change Thumbnail</span>
               </button>
             </div>
           </div>
@@ -517,7 +592,9 @@ const emit = defineEmits(["updatedInput"]);
 
 let name = ref("");
 let url = ref("");
+let layout = ref("");
 let data = ref(null);
+let description = ref("");
 let thumbnaildata = ref(null);
 let isActive = ref(false);
 let isDelete = ref(false);
@@ -610,63 +687,41 @@ console.log(link.value.thumbnailimage);
 onMounted(() => {
   name.value = link.value.name;
   url.value = link.value.url;
+  layout.value = link.value.layout;
+  description.value = link.value.description;
   isActive.value = link.value.active ? true : false;
+  selectedLayout.value = props.link.data?.Layout || "";
 });
 
-const updateLink = debounce(async () => {
+const updateLink = async () => {
   console.log(name.value);
   try {
-    await store.dispatch("updateLink", {
-      id: link.value.id,
-      name: name.value,
-      deascription: null,
-      url: url.value,
-      active: isActive.value,
-    });
+    await store
+      .dispatch("updateLink", {
+        id: link.value.id,
+        name: name.value,
+        deascription: null,
+        url: url.value,
+        category: "SaaS",
+        layout: layout.value,
+        active: isActive.value,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
     await store.dispatch("getAllLinks");
   } catch (error) {
     console.log(error);
+
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     errors.value = error.response.data.errors;
   }
-}, 500);
-
-const changeInput = (str, linkIdNameString) => {
-  if (selectedId.value == link.value.id && selectedStr.value == str) {
-    setTimeout(() => {
-      document.getElementById(`${linkIdNameString}-${link.value.id}`).focus();
-      return;
-    }, 100);
-  }
-};
-
-const editName = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isName") {
-    return true;
-  }
-  return false;
-};
-
-const editLink = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isLink") {
-    return true;
-  }
-  return false;
-};
-
-const editDescription = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isDescription") {
-    return true;
-  }
-  return false;
 };
 
 const editImage = () => {
@@ -680,20 +735,42 @@ const editImage = () => {
 
 const updateLinkImage = async () => {
   try {
-    await store.dispatch("updateLinkImage", data.value);
+    await store.dispatch("updateLinkImage", data.value).then(({ data }) => {
+      store.commit("notify", {
+        type: "success",
+        message: "Saved",
+      });
+    });
     await store.dispatch("getAllLinks");
     setTimeout(() => (openCropper.value = false), 300);
   } catch (error) {
     console.log(error);
+    openCropper.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
   }
 };
 const updateThumbnailLinkImage = async () => {
   try {
-    await store.dispatch("updateThumbnailLinkImage", thumbnaildata.value);
+    await store
+      .dispatch("updateThumbnailLinkImage", thumbnaildata.value)
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
     await store.dispatch("getAllLinks");
     setTimeout(() => (openThumbnailCropper.value = false), 300);
   } catch (error) {
     console.log(error);
+    openCropper.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
   }
 };
 
@@ -704,12 +781,23 @@ const updateItemLayout = async () => {
     console.log(selectedLayout.value);
     console.log(link.id);
 
-    await store.dispatch("updateItemLayout", {
-      Layout: selectedLayout.value,
-      id: link.value.id,
-    });
+    await store
+      .dispatch("updateItemLayout", {
+        Layout: selectedLayout.value,
+        id: link.value.id,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
   } catch (error) {
     console.log(error);
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     //errors.value = error.response.data.errors;
   }
 };
@@ -725,61 +813,6 @@ const deleteLink = async () => {
     console.log(error);
   }
 };
-
-watch(
-  () => name.value,
-  () => {
-    if (name.value && name.value !== link.value.name) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => url.value,
-  () => {
-    if (url.value && url.value !== link.value.url) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => selectedId.value,
-  () => {
-    if (selectedId.value) {
-      changeInput("isName", "editNameInput");
-      changeInput("isLink", "editLinkInput");
-    }
-  }
-);
-
-watch(
-  () => selectedStr.value,
-  () => {
-    if (selectedStr.value) {
-      changeInput("isName", "editNameInput");
-      changeInput("isLink", "editLinkInput");
-    }
-  }
-);
-
-watch(
-  () => selectedLayout.value,
-  () => {
-    console.log(selectedLayout.value);
-    updateItemLayout();
-  }
-);
-
-watch(
-  () => store.state.user.updatedLinkId.value,
-  (val) => {
-    if (!val) {
-      emit("updatedInput", { id: 0, str: "" });
-    }
-  }
-);
 
 watch(
   () => data.value,

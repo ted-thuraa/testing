@@ -2,6 +2,7 @@
   <div class="w-full card-light-shadow rounded-3xl flex flex-row flex-nowrap">
     <div class="flex items-center px-2">
       <svg
+        class="handle"
         width="14"
         height="16"
         viewBox="0 0 14 16"
@@ -36,24 +37,25 @@
         <div>
           <div class="">
             <span
-              class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Portfolio</span
+              class="px-1 py-[1px] rounded-[1rem] bg-amber-300/20 text-xs font-medium text-amber-600/70"
+              >Portfolio</span
             >
           </div>
         </div>
         <div class="">
           <div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label
+              class="relative inline-flex items-center mb-5 cursor-pointer"
+            >
               <input
+                type="checkbox"
                 v-model="isActive"
                 @change="updateLink"
-                type="checkbox"
                 value="true"
                 class="sr-only peer"
-                checked
               />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"
               ></div>
             </label>
           </div>
@@ -71,8 +73,8 @@
                 v-model="name"
                 @change="updateLink"
                 id="input-group-1"
-                class="inputs w-[20rem] bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
-                placeholder="Title"
+                class="inputs w-[20rem] bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-8 p-2.5"
+                placeholder="Portfolio title"
               />
               <div
                 class="absolute inset-y-0 left-0 flex items-center pr-3.5 pointer-events-none"
@@ -532,6 +534,7 @@ let name = ref("");
 let description = ref("");
 let url = ref("");
 let data = ref(null);
+
 let isActive = ref(false);
 let isDelete = ref(false);
 let openCropper = ref(false);
@@ -627,64 +630,50 @@ onMounted(() => {
 const updateLink = async () => {
   console.log(name.value);
   try {
-    await store.dispatch("updateLink", {
-      id: link.value.id,
-      name: name.value,
-      description: description.value,
-      url: url.value,
-      active: isActive.value,
-    });
+    await store
+      .dispatch("updateLink", {
+        id: link.value.id,
+        name: name.value,
+        description: description.value,
+        url: url.value,
+        active: isActive.value,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
     await store.dispatch("getAllLinks");
   } catch (error) {
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
+
     console.log(error);
     errors.value = error.response.data.errors;
   }
 };
 
-const changeInput = (str, linkIdNameString) => {
-  if (selectedId.value == link.value.id && selectedStr.value == str) {
-    setTimeout(() => {
-      document.getElementById(`${linkIdNameString}-${link.value.id}`).focus();
-      return;
-    }, 100);
-  }
-};
-
-const editName = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isName") {
-    return true;
-  }
-  return false;
-};
-
-const editLink = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isLink") {
-    return true;
-  }
-  return false;
-};
-
-const editImage = () => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = link.value.id;
-  } else {
-    isUploadImage.value = true;
-    isDelete.value = false;
-  }
-};
-
 const updatePortfolioThumbnail = async () => {
   try {
-    await store.dispatch("updateThumbnailLinkImage", data.value);
+    await store
+      .dispatch("updateThumbnailLinkImage", data.value)
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
     await store.dispatch("getAllLinks");
     setTimeout(() => (openCropper.value = false), 300);
   } catch (error) {
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
+
     console.log(error);
   }
 };
@@ -696,11 +685,23 @@ const updateItemLayout = async () => {
     console.log(selectedLayout.value);
     console.log(link.id);
 
-    await store.dispatch("updateItemLayout", {
-      Layout: selectedLayout.value,
-      id: link.value.id,
-    });
+    await store
+      .dispatch("updateItemLayout", {
+        Layout: selectedLayout.value,
+        id: link.value.id,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
   } catch (error) {
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
+
     console.log(error);
     //errors.value = error.response.data.errors;
   }
@@ -710,51 +711,23 @@ const deleteLink = async () => {
   let res = confirm("Are you sure you want to delete this link?");
   try {
     if (res) {
-      await store.dispatch("deleteLink", link.value.id);
+      await store.dispatch("deleteLink", link.value.id).then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
       await store.dispatch("getAllLinks");
     }
   } catch (error) {
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
+
     console.log(error);
   }
 };
-
-watch(
-  () => name.value,
-  () => {
-    if (name.value && name.value !== link.value.name) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => url.value,
-  () => {
-    if (url.value && url.value !== link.value.url) {
-      updateLink();
-    }
-  }
-);
-
-watch(
-  () => selectedId.value,
-  () => {
-    if (selectedId.value) {
-      changeInput("isName", "editNameInput");
-      changeInput("isLink", "editLinkInput");
-    }
-  }
-);
-
-watch(
-  () => selectedStr.value,
-  () => {
-    if (selectedStr.value) {
-      changeInput("isName", "editNameInput");
-      changeInput("isLink", "editLinkInput");
-    }
-  }
-);
 
 watch(
   () => selectedLayout.value,

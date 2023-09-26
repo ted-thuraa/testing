@@ -3,7 +3,7 @@
     <Listbox v-model="selectedPerson">
       <div class="relative mt-1">
         <ListboxButton
-          class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+          class="relative w-full min-h-[40px] cursor-default rounded-lg bg-gray-50 py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
         >
           <span class="block truncate">{{ props.formtype }}</span>
           <span
@@ -83,9 +83,9 @@ const people = [
   { name: "Mailing List" },
   { name: "Rating" },
   { name: "Custom" },
-  { name: "Hire me" },
+  { name: "Hire" },
 ];
-const selectedPerson = ref(people[0]);
+const selectedPerson = ref(null);
 
 watch(
   () => selectedPerson.value,

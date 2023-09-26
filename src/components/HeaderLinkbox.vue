@@ -2,6 +2,7 @@
   <div class="w-full card-light-shadow rounded-3xl flex flex-row flex-nowrap">
     <div class="flex items-center px-2">
       <svg
+        class="handle cursor-grab"
         width="14"
         height="16"
         viewBox="0 0 14 16"
@@ -36,42 +37,43 @@
         <div>
           <div class="">
             <span
-              class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Header</span
+              class="px-1 py-[1px] rounded-[1rem] bg-amber-300/20 text-xs font-medium text-amber-600/70"
+              >Header</span
             >
           </div>
         </div>
         <div class="">
           <div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label
+              class="relative inline-flex items-center mb-5 cursor-pointer"
+            >
               <input
+                type="checkbox"
                 v-model="isActive"
                 @change="updateLink"
-                type="checkbox"
                 value="true"
                 class="sr-only peer"
-                checked
               />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"
               ></div>
             </label>
           </div>
         </div>
       </div>
       <div :id="`LinkBox${link.id}`" class="w-full">
-        <div id="MainLinkBoxSection" class="relative px-8 pt-2 pb-14">
-          <div class="">
+        <div id="MainLinkBoxSection" class="relative md:px-8 pt-2 pb-14">
+          <div class="w-full flex items-center justify-center">
             <!-- <label for="Title" class="text-sm leading-6 text-gray-600"
                   >Title</label
                 > -->
-            <div class="relative mb-0.5 w-auto font-medium">
+            <div class="relative w-min mb-0.5 font-medium">
               <input
                 type="text"
                 v-model="name"
                 @change="updateLink"
                 id="input-group-1"
-                class="inputs w-[20rem] bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl-4 p-2.5"
+                class="inputs text-center bg-transparent focus:bg-gray-50 focus:border-opacity-0 focus:border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-50 block pl- p-2.5"
                 placeholder="Title"
               />
               <div
@@ -251,7 +253,11 @@
             <form @submit.prevent="updateCategory()">
               <!-- text position -->
               <div class="mt-10">
-                <RadioGroup v-model="selectedTextAlign" class="mt-4">
+                <RadioGroup
+                  v-model="selectedTextAlign"
+                  @update:modelValue="(value) => dataChange()"
+                  class="mt-4"
+                >
                   <RadioGroupLabel class="sr-only"
                     >Choose a size</RadioGroupLabel
                   >
@@ -266,8 +272,11 @@
                     >
                       <div
                         :class="[
-                          active ? 'bg-gray-950 text-white' : 'text-gray-950',
-                          'group relative flex items-center justify-center mr-4 w-auto mb-3 rounded-full  py-0.5 px-1 text-sm font-medium hover:bg-gray-50 focus:outline-none sm:flex-1',
+                          active ? 'bg-purple-700 text-white' : 'text-gray-950',
+                          checked
+                            ? 'bg-purple-700 text-white'
+                            : 'border-transparent',
+                          'group relative flex items-center justify-center  w-auto mb-3 rounded-full  py-1 px-0.5 text-sm font-medium  focus:outline-none sm:flex-1',
                         ]"
                       >
                         <span v-html="position.icon" />
@@ -330,6 +339,7 @@ const props = defineProps({
   selectedStr: { type: String, default: "" },
 });
 const { link, selectedId, selectedStr } = toRefs(props);
+const model = ref(JSON.parse(JSON.stringify(props.link)));
 
 const emit = defineEmits(["updatedInput"]);
 
@@ -343,103 +353,6 @@ let openCropper = ref(false);
 let isUploadImage = ref(false);
 let isUpdateHeaderAlignment = ref(false);
 let errors = null;
-
-onMounted(() => {
-  name.value = link.value.name;
-  url.value = link.value.url;
-  isActive.value = link.value.active ? true : false;
-});
-
-const updateLink = async () => {
-  console.log(name.value);
-  try {
-    await store.dispatch("updateLink", {
-      id: link.value.id,
-      name: name.value,
-      deascription: null,
-      url: url.value,
-      active: isActive.value,
-    });
-    await store.dispatch("getAllLinks");
-  } catch (error) {
-    console.log(error);
-    errors.value = error.response.data.errors;
-  }
-};
-
-const changeInput = (str, linkIdNameString) => {
-  if (selectedId.value == link.value.id && selectedStr.value == str) {
-    setTimeout(() => {
-      document.getElementById(`${linkIdNameString}-${link.value.id}`).focus();
-      return;
-    }, 100);
-  }
-};
-
-const editName = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isName") {
-    return true;
-  }
-  return false;
-};
-
-const editLink = (selectedId, selectedStr) => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = selectedId;
-    return false;
-  } else if (selectedId == link.value.id && selectedStr == "isLink") {
-    return true;
-  }
-  return false;
-};
-
-const editImage = () => {
-  if (store.state.user.isMobile) {
-    store.state.user.updatedLinkId = link.value.id;
-  } else {
-    isUploadImage.value = true;
-    isDelete.value = false;
-  }
-};
-
-const updateLinkImage = async () => {
-  try {
-    await store.dispatch("updateLinkImage", data.value);
-    await store.dispatch("getAllLinks");
-    setTimeout(() => (openCropper.value = false), 300);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const deleteLink = async () => {
-  let res = confirm("Are you sure you want to delete this link?");
-  try {
-    if (res) {
-      await store.dispatch("deleteLink", link.value.id);
-      await store.dispatch("getAllLinks");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-watch(
-  () => store.state.user.updatedLinkId.value,
-  (val) => {
-    if (!val) {
-      emit("updatedInput", { id: 0, str: "" });
-    }
-  }
-);
-
-watch(
-  () => data.value,
-  async () => await updateLinkImage()
-);
 
 const textAlign = [
   {
@@ -510,4 +423,78 @@ const textAlign = [
 ];
 
 const selectedTextAlign = ref(textAlign[0]);
+
+onMounted(() => {
+  name.value = link.value.name;
+  url.value = link.value.url;
+  isActive.value = link.value.active ? true : false;
+  selectedTextAlign.value.name = props.link.data?.textAlignment || "";
+});
+
+const updateLink = async () => {
+  console.log(name.value);
+  try {
+    await store.dispatch("updateLink", {
+      id: link.value.id,
+      name: name.value,
+      deascription: null,
+      url: url.value,
+      active: isActive.value,
+    });
+    await store.dispatch("getAllLinks");
+  } catch (error) {
+    console.log(error);
+    errors.value = error.response.data.errors;
+  }
+};
+
+const dataChange = async () => {
+  model.value.data = {
+    textAlignment: selectedTextAlign.value,
+  };
+  console.log(model.value.data);
+
+  try {
+    await store.dispatch("updateStartupData", model.value);
+    await store.dispatch("getAllLinks");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateLinkImage = async () => {
+  try {
+    await store.dispatch("updateLinkImage", data.value);
+    await store.dispatch("getAllLinks");
+    setTimeout(() => (openCropper.value = false), 300);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteLink = async () => {
+  let res = confirm("Are you sure you want to delete this link?");
+  try {
+    if (res) {
+      await store.dispatch("deleteLink", link.value.id);
+      await store.dispatch("getAllLinks");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+watch(
+  () => store.state.user.updatedLinkId.value,
+  (val) => {
+    if (!val) {
+      emit("updatedInput", { id: 0, str: "" });
+    }
+  }
+);
+
+watch(
+  () => data.value,
+  async () => await updateLinkImage()
+);
 </script>

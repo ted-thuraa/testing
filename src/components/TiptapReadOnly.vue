@@ -3,22 +3,28 @@
 </template>
 
 <script setup>
+import Document from "@tiptap/extension-document";
+import Dropcursor from "@tiptap/extension-dropcursor";
+import Image from "@tiptap/extension-image";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
 import StarterKit from "@tiptap/starter-kit";
 import { BubbleMenu, Editor, EditorContent, FloatingMenu } from "@tiptap/vue-3";
 import { watch, ref, onMounted, toRefs, onBeforeUnmount } from "vue";
 const props = defineProps({
-  link: Object,
+  //selectedId: { type: Number, default: 0 },
+  portfolio_blog: { type: String, default: "" },
 });
 
-const { link } = toRefs(props);
+const { portfolio_blog } = toRefs(props);
 
 const editor = ref(null);
 
 onMounted(() => {
   editor.value = new Editor({
     editable: false,
-    extensions: [StarterKit],
-    content: link.value.data.portfolio_blog,
+    extensions: [StarterKit, Document, Paragraph, Text, Image, Dropcursor],
+    content: portfolio_blog.value,
     // triggered on every change
     // onUpdate: ({ editor }) => {
     //     const html = editor.getHTML();
@@ -74,7 +80,7 @@ onBeforeUnmount(() => {
     color: rgb(17 24 39 / var(--tw-text-opacity));
   }
   p {
-    margin-top: 1.5rem /* 24px */;
+    //margin-top: 1.5rem /* 24px */;
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
     font-size: 16px;
@@ -82,7 +88,7 @@ onBeforeUnmount(() => {
   }
 
   ul {
-    margin-top: 1rem /* 16px */;
+    margin-top: 0.2rem /* 16px */;
     list-style-type: disc;
     padding-left: 1rem /* 16px */;
     font-size: 0.875rem /* 14px */;
@@ -117,9 +123,6 @@ onBeforeUnmount(() => {
   img {
     max-width: 100%;
     height: auto;
-    &.ProseMirror-selectednode {
-      outline: 3px solid #68cef8;
-    }
   }
 
   blockquote {

@@ -149,14 +149,27 @@ function toggleEdit(icon) {
 
 const updateicon = async () => {
   try {
-    await store.dispatch("updateSocialIcon", {
-      id: toEdit.value.id,
-      url: toEdit.value.url,
-      active: active.value,
-    });
+    await store
+      .dispatch("updateSocialIcon", {
+        id: toEdit.value.id,
+        url: toEdit.value.url,
+        active: active.value,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+        editUrl.value = false;
+      });
     await store.dispatch("getAllSocialIcons");
   } catch (error) {
     console.log(error);
+    editUrl.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     errors.value = error.response.data.errors;
   }
 };

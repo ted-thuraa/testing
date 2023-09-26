@@ -2,6 +2,7 @@
   <div class="w-full card-light-shadow rounded-3xl flex flex-row flex-nowrap">
     <div class="flex items-center px-2">
       <svg
+        class="handle"
         width="14"
         height="16"
         viewBox="0 0 14 16"
@@ -36,31 +37,32 @@
         <div>
           <div class="">
             <span
-              class="px-1 py-[1px] rounded-[1rem] bg-gray-100 text-xs font-medium text-gray-600"
-              >Edit Video</span
+              class="px-1 py-[1px] rounded-[1rem] bg-amber-300/20 text-xs font-medium text-amber-600/70"
+              >Video</span
             >
           </div>
         </div>
         <div class="">
           <div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label
+              class="relative inline-flex items-center mb-5 cursor-pointer"
+            >
               <input
+                type="checkbox"
                 v-model="isActive"
                 @change="updateLink"
-                type="checkbox"
                 value="true"
                 class="sr-only peer"
-                checked
               />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"
               ></div>
             </label>
           </div>
         </div>
       </div>
       <div :id="`LinkBox${link.id}`" class="w-full">
-        <div id="MainSection" class="relative h-full px-8 pt-2 pb-14">
+        <div id="MainSection" class="relative h-full md:px-8 pt-2 pb-14">
           <div class="flex items-center justify-between p-3">
             <div class="">
               <!-- <label for="url" class="text-sm leading-6 text-gray-600"
@@ -521,16 +523,27 @@ onMounted(() => {
 const updateLink = debounce(async () => {
   console.log(name.value);
   try {
-    await store.dispatch("updateLink", {
-      id: link.value.id,
-      name: name.value,
-      deascription: null,
-      url: url.value,
-      active: isActive.value,
-    });
+    await store
+      .dispatch("updateLink", {
+        id: link.value.id,
+        name: name.value,
+        deascription: null,
+        url: url.value,
+        active: isActive.value,
+      })
+      .then(({ data }) => {
+        store.commit("notify", {
+          type: "success",
+          message: "Saved",
+        });
+      });
     await store.dispatch("getAllLinks");
   } catch (error) {
     console.log(error);
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     errors.value = error.response.data.errors;
   }
 }, 500);

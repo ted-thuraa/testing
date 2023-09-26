@@ -3,11 +3,45 @@
     <div class="relative w-full">
       <div class="flex flex-col mb-3 w-full h-full text-gray-950">
         <div class="mb-2">
-          <p class="p-0 m-0 font-semibold text-base">Diigital product</p>
+          <p class="p-0 m-0 font-semibold text-base">Digital product</p>
         </div>
-        <div class="mb-5">
-          <p class="p-0 text-[14px] text-slate-700">Describe your product</p>
+        <div class="mt-4">
+          <label
+            for="message"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Product Name</label
+          >
+
+          <input
+            v-model="product_name"
+            type="text"
+            id="email-address-icon"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            placeholder="SaaS theme"
+          />
         </div>
+        <div class="mt-4">
+          <label
+            for="message"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Product Price</label
+          >
+          <div class="relative w-[10rem] font-medium">
+            <input
+              type="number"
+              v-model="product_price"
+              id="input-group-1"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5"
+              placeholder="25"
+            />
+            <div
+              class="absolute inset-y-0 left-0 flex items-center pr-3.5 pointer-events-none"
+            >
+              <span class="pl-2">$</span>
+            </div>
+          </div>
+        </div>
+
         <div class="mb-5">
           <p class="p-0 m-0 font-semibold text-base"></p>
           <p class="p-0 text-[14px] text-slate-700"></p>
@@ -15,7 +49,7 @@
             <label
               for="message"
               class="block mb-2 text-sm font-medium text-gray-900"
-              >Sell your product</label
+              >Describe your product</label
             >
 
             <TipTapEditor
@@ -137,9 +171,29 @@
       </div>
 
       <button
+        v-if="saving"
+        class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
+      >
+        <div class="m-auto text-gray-200">
+          <!-- Animation Snippet -->
+          <div>
+            <span
+              class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash"
+            ></span
+            ><span
+              class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.2s]"
+            ></span
+            ><span
+              class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.4s]"
+            ></span>
+          </div>
+        </div>
+      </button>
+      <button
+        v-else
         type="submit"
         @click="updateportfolioBlog"
-        class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-700 hover:bg-gray-950"
+        class="mt-8 text-xl flex items-center justify-center w-full py-2 md:py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
       >
         <span>Save</span>
       </button>
@@ -172,12 +226,15 @@ const model = ref(JSON.parse(JSON.stringify(props.link)));
 
 let title = ref("");
 let product_desc = ref("");
+let product_name = ref("");
+let product_price = ref("");
 let selectedcheckout = ref("");
 let gumurl = ref("");
 let lemonurl = ref("");
 let category = ref("");
 let product_thumbnail = ref("");
 let errors = ref(null);
+let saving = ref(false);
 
 const checkoutOptions = [
   {
@@ -201,11 +258,14 @@ const updateProductDescData = async ($event) => {
   console.log(product_desc.value);
 };
 const updateportfolioBlog = async ($event) => {
+  saving.value = true;
   errors.value = null;
 
   model.value.data = {
     title: title.value,
     product_desc: product_desc.value,
+    product_name: product_name.value,
+    product_price: product_price.value,
     selectedcheckout: selectedcheckout.value,
     gumurl: gumurl.value,
     lemonurl: lemonurl.value,
@@ -219,8 +279,14 @@ const updateportfolioBlog = async ($event) => {
 
     await store.dispatch("updateStartupData", model.value);
     await store.dispatch("getAllLinks");
+    saving.value = false;
   } catch (error) {
     console.log(error);
+    saving.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
     //errors.value = error.response.data.errors;
   }
 };
@@ -228,6 +294,8 @@ const updateportfolioBlog = async ($event) => {
 onMounted(async () => {
   console.log(link.value.portfolio_data);
   product_desc.value = props.link.data?.product_desc || "";
+  product_name.value = props.link.data?.product_name || "";
+  product_price.value = props.link.data?.product_price || "";
   selectedcheckout.value = props.link.data?.selectedcheckout || "";
   gumurl.value = props.link.data?.gumurl || "";
   lemonurl.value = props.link.data?.lemonurl || "";

@@ -1,32 +1,67 @@
 <template>
-  <div class="max-w-xl lg:max-w-lg py-2">
-    <h2
-      class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-    >
-      {{ link.name }}
-    </h2>
-    <p class="text-center mt-4 text-base leading-7 text-gray-700">
-      {{ link.data.additionaldescription }}
-    </p>
-    <div class="mt-6 flex flex-col max-w-md gap-x-4">
-      <label for="email-address" class="sr-only">Email address</label>
-      <input
-        v-model="email"
-        id="email-address"
-        name="email"
-        type="email"
-        autocomplete="email"
-        required=""
-        class="min-w-0 flex-auto rounded-md border-0 bg-gray-500/5 px-3.5 my-4 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-purple-500 sm:text-sm sm:leading-6"
-        placeholder="Enter your email"
-      />
-      <button
-        @click="submitSurvey"
-        type="submit"
-        class="flex-none rounded-md bg-purple-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-      >
-        Subscribe
-      </button>
+  <div
+    class="min-w-[288px] w-full min-h-[236px] max-h-[520px] mb-4 rounded-[24px] shadow transition-all duration-500 ease-in"
+    :class="theme.cardsBg"
+  >
+    <div class="flex flex-col items-center relative h-min pb-1 w-full">
+      <div class="m-0 py-2 px-6">
+        <div class="max-w-xl lg:max-w-lg py-2">
+          <h2
+            class="text-center text-3xl font-bold tracking-tight sm:text-4xl"
+            :class="theme.cardsHtext"
+          >
+            {{ link.name }}
+          </h2>
+          <p
+            class="text-center mt-4 text-base leading-7"
+            :class="theme.cardsPtext"
+          >
+            {{ link.data.additionaldescription }}
+          </p>
+          <div
+            class="mt-6 flex flex-col items-center justify-center md:flex-row gap-x-4"
+          >
+            <label for="email-address" class="sr-only">Email address</label>
+            <div class="relative w-80 mb-6">
+              <div class="">
+                <input
+                  v-model="email"
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required=""
+                  class="min-w-0 w-full flex-auto rounded-xl border-0 px-3.5 my-4 pr-14 py-3 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                  :class="theme.inputs"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div
+                class="absolute z-50 inset-y-0 right-0 flex items-center pl-3.5 cursor-pointer"
+              >
+                <button
+                  @click="submitSurvey"
+                  type="submit"
+                  class="flex-none cursor-pointer rounded-lg mr-2 px-3.5 py-2.5 text-sm font-semibold shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  :class="theme.buttonVariations.btnVar1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    class="w-3 h-3"
+                  >
+                    <path
+                      d="M.5 1.163A1 1 0 0 1 1.97.28l12.868 6.837a1 1 0 0 1 0 1.766L1.969 15.72A1 1 0 0 1 .5 14.836V10.33a1 1 0 0 1 .816-.983L8.5 8 1.316 6.653A1 1 0 0 1 .5 5.67V1.163Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,8 +73,9 @@ const store = useStore();
 
 const props = defineProps({
   link: Object,
+  theme: Object,
 });
-const { link } = toRefs(props);
+const { link, theme } = toRefs(props);
 console.log(link);
 
 let fullname = ref("");
@@ -48,15 +84,27 @@ let answersModel = ref({});
 let message = ref("");
 let phone = ref("");
 let country = ref("");
+let answers = ref([]);
 
 function submitSurvey() {
   //console.log(store.state.guestpagedata.data.page.id);
   //console.log(JSON.stringify(answers.value, undefined, 2));
+  answers.value = [
+    {
+      question: "name",
+      question_answers: fullname.value,
+    },
+    {
+      question: "email",
+      question_answers: email.value,
+    },
+  ];
+
   answersModel.value = {
-    page_id: store.state.guestpagedata.data.page.id,
+    uid: store.state.guestpagedata.data.page.id,
     form_id: link.value.id,
     type: "Mailing List",
-    data: email.value,
+    data: answers.value,
   };
   console.log(answersModel.value);
   store.dispatch("saveSurveyAnswer", answersModel.value).then((response) => {

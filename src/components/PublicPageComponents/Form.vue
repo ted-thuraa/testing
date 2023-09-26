@@ -1,16 +1,15 @@
 <template>
   <!-- eslint-disable -->
-  <div class="mb-4 bg-white card-light-shadow rounded-[24px] shadow">
-    <div class="flex flex-col relative h-min pb-1 w-full">
-      <div v-if="link && link.data && link.data.formtype" class="m-0 py-2 px-6">
-        <component
-          :is="getFormComponent(link.data.formtype)"
-          :link="link"
-          class=""
-        />
-      </div>
-    </div>
+
+  <div ref="targetElement" v-if="link && link.data && link.data.formtype">
+    <component
+      :is="getFormComponent(link.data.formtype)"
+      :link="link"
+      :theme="theme"
+      class=""
+    />
   </div>
+
   <FormPanel
     :link="link"
     :isFormOpen="isFormOpen"
@@ -25,18 +24,72 @@ import Rating from "../helpers/RatingForm.vue";
 import Hire from "../helpers/HireForm.vue";
 import Contact from "../helpers/ContactForm.vue";
 import Custom from "../helpers/CustomForm.vue";
-import FormPanel from "../popovers/FormPanel.vue";
+
 import { watch, ref, onMounted, toRefs } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 
 const props = defineProps({
   link: Object,
+  theme: Object,
 });
-const { link } = toRefs(props);
+const { link, theme } = toRefs(props);
 console.log(link);
 
-let isFormOpen = ref(false);
+let data = ref({});
+
+const isVisible = ref(false);
+const viewRecorded = ref(false);
+
+const handleIntersection = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      isVisible.value = true;
+      if (targetElement.value) {
+        observer.unobserve(targetElement.value);
+      }
+      //observer.unobserve(targetElement);
+    }
+  });
+};
+
+const targetElement = ref(null);
+
+let observer;
+
+onMounted(() => {
+  observer = new IntersectionObserver(handleIntersection, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  });
+
+  observer.observe(targetElement.value);
+});
+
+async function updateAnaltics() {
+  if (isVisible.value == true && viewRecorded.value == false) {
+    data.value = {
+      page_id: store.state.guestpagedata.data.page.id,
+      link_id: link.value.id,
+    };
+    try {
+      const res = await store.dispatch("gotchYaFormViews", data.value);
+      console.log(res);
+      viewRecorded.value == true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+watch(
+  () => isVisible.value,
+  async () => {
+    console.log(isVisible.value);
+    updateAnaltics();
+  }
+);
 
 function openFormPanel() {
   isFormOpen.value = true;
@@ -55,12 +108,12 @@ function getFormComponent(category) {
       return Poll;
     case "Rating":
       return Rating;
-    case "Hire me":
+    case "Hire":
       return Hire;
     case "Custom":
       return Custom;
-    //case "Contact form":
-    //  return Contact;
+    case "Contact form":
+      return Contact;
     // Handle other categories here if needed
     default:
       return; // Replace 'DefaultComponent' with a fallback component name

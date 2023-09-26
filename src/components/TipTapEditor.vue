@@ -92,7 +92,7 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import StarterKit from "@tiptap/starter-kit";
 import { BubbleMenu, Editor, EditorContent, FloatingMenu } from "@tiptap/vue-3";
-import { watch, ref, onMounted, toRefs, onBeforeUnmount } from "vue";
+import { watch, computed, ref, onMounted, toRefs, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   //selectedId: { type: Number, default: 0 },
@@ -102,7 +102,8 @@ const props = defineProps({
 const { portfolio_blog } = toRefs(props);
 const emit = defineEmits(["change"]);
 const editor = ref(null);
-
+const contentdata = computed(() => portfolio_blog.value);
+console.log(contentdata.value);
 function addImage() {
   const url = window.prompt("URL");
 
@@ -115,7 +116,8 @@ onMounted(() => {
   console.log(portfolio_blog);
   editor.value = new Editor({
     extensions: [StarterKit, Document, Paragraph, Text, Image, Dropcursor],
-    content: portfolio_blog,
+    //content: portfolio_blog.value,
+    content: contentdata.value,
     // content: `
     //       <p>This is a basic example of implementing images. Drag to re-order.</p>
     //       <img src="https://source.unsplash.com/8xznAGy4HcY/800x400" />

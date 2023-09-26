@@ -63,7 +63,7 @@
                         id="checked-checkbox"
                         type="checkbox"
                         value="true"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500"
                       />
                     </td>
                     <td class="px-6 py-4">
@@ -78,7 +78,7 @@
                           checked
                         />
                         <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"
                         ></div>
                       </label>
                     </td>
@@ -97,7 +97,7 @@
                         id="checked-checkbox"
                         type="checkbox"
                         value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
                       />
                     </td>
                     <td class="px-6 py-4">
@@ -112,7 +112,7 @@
                           checked
                         />
                         <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"
                         ></div>
                       </label>
                     </td>
@@ -131,7 +131,7 @@
                         id="checked-checkbox"
                         type="checkbox"
                         value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
                       />
                     </td>
                     <td class="px-6 py-4">
@@ -146,7 +146,7 @@
                           checked
                         />
                         <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"
                         ></div>
                       </label>
                     </td>
@@ -165,7 +165,7 @@
                         id="checked-checkbox"
                         type="checkbox"
                         value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
                       />
                     </td>
                     <td class="px-6 py-4">
@@ -180,7 +180,7 @@
                           checked
                         />
                         <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"
                         ></div>
                       </label>
                     </td>
@@ -199,7 +199,7 @@
                         id="checked-checkbox"
                         type="checkbox"
                         value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
                       />
                     </td>
                     <td class="px-6 py-4">
@@ -214,7 +214,7 @@
                           checked
                         />
                         <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-purple-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"
                         ></div>
                       </label>
                     </td>
@@ -223,6 +223,9 @@
               </table>
             </div>
           </div>
+        </div>
+        <div v-if="formtype === 'Hire'" class="mt-10">
+          <HireFormDataEditor :link="link" @change="updateHireFormData" />
         </div>
         <div v-if="formtype === 'Poll'" class="mt-10">
           <PollFormDataEditor
@@ -335,209 +338,10 @@
           </div>
         </div>
         <div v-if="formtype === 'Feedback form'" class="mt-10">
-          <div class="mb-2">
-            <p class="p-0 m-0 font-semibold text-base">Feedback form</p>
-          </div>
-          <div class="mb-5">
-            <p class="p-0 text-[14px] text-slate-700">
-              Receive feedback in your inbox
-            </p>
-          </div>
-          <div class="mb-5">
-            <div class="relative overflow-x-auto sm:rounded-lg mb-4">
-              <table class="w-full text-sm text-left text-gray-500">
-                <caption
-                  class="text-lg font-semibold text-left text-gray-900 bg-white"
-                >
-                  Fields
-                  <p class="mt-1 text-sm font-normal text-gray-500">
-                    Use fields to collect a specific type of information. Mark a
-                    field required to make it mandatory for visitors to
-                    complete.
-                  </p>
-                </caption>
-                <thead class="text-xs text-gray-700 uppercase">
-                  <tr>
-                    <th scope="col" class="px-6 py-3">Field</th>
-                    <th scope="col" class="px-6 py-3">required?</th>
-                    <th scope="col" class="px-6 py-3">status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="bg-white border-b">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                    >
-                      Name
-                    </th>
-                    <td class="px-6 py-4">
-                      <input
-                        v-model="isNameRequired"
-                        checked
-                        id="checked-checkbox"
-                        type="checkbox"
-                        value="true"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          v-model="get_name"
-                          type="checkbox"
-                          value="true"
-                          class="sr-only peer"
-                          checked
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                        ></div>
-                      </label>
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                    >
-                      Email address
-                    </th>
-                    <td class="px-6 py-4">
-                      <input
-                        v-model="isEmailRequired"
-                        checked
-                        id="checked-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          v-model="get_email"
-                          type="checkbox"
-                          value="true"
-                          class="sr-only peer"
-                          checked
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                        ></div>
-                      </label>
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                    >
-                      Mobile
-                    </th>
-                    <td class="px-6 py-4">
-                      <input
-                        v-model="isMobileRequired"
-                        checked
-                        id="checked-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          v-model="get_mobile"
-                          type="checkbox"
-                          value="true"
-                          class="sr-only peer"
-                          checked
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                        ></div>
-                      </label>
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                    >
-                      Message
-                    </th>
-                    <td class="px-6 py-4">
-                      <input
-                        v-model="isMessageRequired"
-                        checked
-                        id="checked-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          v-model="get_message"
-                          type="checkbox"
-                          value="true"
-                          class="sr-only peer"
-                          checked
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                        ></div>
-                      </label>
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                    >
-                      Country
-                    </th>
-                    <td class="px-6 py-4">
-                      <input
-                        v-model="isCountryRequired"
-                        checked
-                        id="checked-checkbox"
-                        type="checkbox"
-                        value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                      />
-                    </td>
-                    <td class="px-6 py-4">
-                      <label
-                        class="relative inline-flex items-center cursor-pointer"
-                      >
-                        <input
-                          v-model="get_country"
-                          type="checkbox"
-                          value="true"
-                          class="sr-only peer"
-                          checked
-                        />
-                        <div
-                          class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                        ></div>
-                      </label>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <feedbackFormDataEditor
+            :link="link"
+            @change="updateFeedbackFormData"
+          />
         </div>
         <div v-if="formtype === 'Mailing List'" class="mt-10">
           <div class="mb-2">
@@ -650,28 +454,33 @@
             Questions
 
             <!-- Add new question -->
+
             <button
-              type="button"
+              v-if="!questions.length"
               @click="addQuestion()"
-              class="flex items-center text-sm py-1 px-4 rounded-sm text-white bg-gray-600 hover:bg-gray-700"
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-[0.8rem] group bg-purple-600 group-hover:purple-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+              <span
+                class="relative inline-flex items-center justify-center px-5 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[0.6rem] group-hover:bg-opacity-0"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              Add Question
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Add Question
+              </span>
             </button>
             <!--/ Add new question -->
           </h3>
-          <div v-if="!questions.length" class="text-center text-gray-600">
+          <div v-if="!questions.length" class="mt-4 text-center text-gray-600">
             You don't have any questions created
           </div>
           <div v-for="(question, index) in questions" :key="question.id">
@@ -907,8 +716,28 @@
         <!-- expirydate -->
 
         <button
+          v-if="saving"
+          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
+        >
+          <div class="m-auto text-gray-200">
+            <!-- Animation Snippet -->
+            <div>
+              <span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash"
+              ></span
+              ><span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.2s]"
+              ></span
+              ><span
+                class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block animate-flash [animation-delay:0.4s]"
+              ></span>
+            </div>
+          </div>
+        </button>
+        <button
+          v-else
           type="submit"
-          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-700 hover:bg-gray-950"
+          class="mt-8 text-xl flex items-center justify-center w-full py-3 rounded-full text-white font-semibold bg-purple-600 hover:bg-purple-800"
         >
           <span>Save</span>
         </button>
@@ -924,11 +753,13 @@ import {
   RadioGroupDescription,
   RadioGroupOption,
 } from "@headlessui/vue";
+import HireFormDataEditor from "./HireFormDataEditor.vue";
 import mailchimpicon from "../assets/images/mailchimp.jpeg";
 import googlesheetsicon from "../assets/images/googlesheets.png";
 import Emailsvg from "../assets/svg/Emailisvg.vue";
 import Listbox from "./Listbox.vue";
 import RatingFormeditor from "./RatingFormeditor.vue";
+import feedbackFormDataEditor from "./feedbackFormDataEditor.vue";
 import CustomFormEditor from "./CustomFormEditor.vue";
 import PollFormDataEditor from "./PollFormDataEditor.vue";
 import ToggleSwitch from "./ToggleSwitch.vue";
@@ -961,6 +792,8 @@ let isCountryRequired = ref(false);
 let get_country = ref(false);
 let poll_data = ref({ poll_question: "", poll_options: [] });
 let ratingformdata = ref([]);
+let feedbackformdata = ref([]);
+let hireformdata = ref([]);
 let questions = ref([]);
 
 let responcesEmail = ref("");
@@ -969,6 +802,7 @@ let mailchimplistid = ref("");
 let additionaldescription = ref("");
 let thankyoutext = ref("");
 let errors = ref(null);
+let saving = ref(false);
 const responsesOptions = [
   {
     name: "Email",
@@ -995,6 +829,14 @@ function updateformtype(payload) {
 function updateRatingFormData(payload) {
   console.log(payload);
   ratingformdata.value = payload;
+}
+function updateFeedbackFormData(payload) {
+  console.log(payload);
+  feedbackformdata.value = payload;
+}
+function updateHireFormData(payload) {
+  console.log(payload);
+  hireformdata.value = payload;
 }
 
 function addQuestion(index) {
@@ -1049,6 +891,9 @@ onMounted(async () => {
     poll_question: "",
     poll_options: [],
   };
+  hireformdata.value = props.link.data?.hireformdata || [];
+  ratingformdata.value = props.link.data?.ratingformdata || [];
+  feedbackformdata.value = props.link.data?.feedbackformdata || [];
   questions.value = props.link.data?.customformquestions || [];
 
   googlesheetsToken.value = props.link.google_sheets_url;
@@ -1058,6 +903,7 @@ onMounted(async () => {
 });
 
 const updateFormData = async () => {
+  saving.value = true;
   cleanUnwantedData(formtype.value);
   console.log(model.value.data);
   model.value.data = {
@@ -1080,7 +926,8 @@ const updateFormData = async () => {
     additionaldescription: additionaldescription.value,
     poll_data: poll_data.value,
     ratingformdata: ratingformdata.value,
-    ratingformdata: ratingformdata.value,
+    feedbackformdata: feedbackformdata.value,
+    hireformdata: hireformdata.value,
     customformquestions: questions.value,
   };
   model.value.google_sheets_url = googlesheetsToken.value;
@@ -1089,10 +936,21 @@ const updateFormData = async () => {
   model.value.responces_storage = storage.value;
   console.log(model.value);
   try {
-    await store.dispatch("updateFormData", model.value);
+    await store.dispatch("updateFormData", model.value).then(({ data }) => {
+      store.commit("notify", {
+        type: "success",
+        message: "Saved",
+      });
+    });
     await store.dispatch("getAllLinks");
+    saving.value = false;
   } catch (error) {
     console.log(error);
+    saving.value = false;
+    store.commit("notify", {
+      type: "error",
+      message: "Failed",
+    });
   }
 };
 
@@ -1101,34 +959,54 @@ async function cleanUnwantedData(category) {
     case "Contact form":
       questions.value = [];
       ratingformdata.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
       poll_data.value = { poll_question: "", poll_options: [] };
       return;
     case "Poll":
       questions.value = [];
       ratingformdata.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
       return;
     case "Waiting List":
       questions.value = [];
       ratingformdata.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
       poll_data.value = { poll_question: "", poll_options: [] };
       return;
     case "Feedback form":
       questions.value = [];
       ratingformdata.value = [];
+
+      hireformdata = [];
       poll_data.value = { poll_question: "", poll_options: [] };
       return;
     case "Mailing List":
       questions.value = [];
       ratingformdata.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
       poll_data.value = { poll_question: "", poll_options: [] };
       return;
     case "Rating":
       poll_data.value = { poll_question: "", poll_options: [] };
       questions.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
+      return;
+    case "Hire":
+      poll_data.value = { poll_question: "", poll_options: [] };
+      questions.value = [];
+      ratingformdata.value = [];
+      feedbackformdata.value = [];
       return;
     case "Custom":
       poll_data.value = { poll_question: "", poll_options: [] };
       ratingformdata.value = [];
+      feedbackformdata.value = [];
+      hireformdata = [];
       return;
     // Handle other categories here if needed
     default:

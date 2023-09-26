@@ -16,7 +16,7 @@
               leave-to="translate-x-full"
             >
               <DialogPanel
-                class="pointer-events-auto relative w-screen max-w-md"
+                class="pointer-events-auto relative w-screen max-w-md lg:max-w-xl"
               >
                 <div
                   class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
@@ -25,7 +25,7 @@
                     <div class="px-4 sm:px-6 relative flex items-start">
                       <button
                         type="button"
-                        class="mt-5 p-1 flex items-center rounded-md shadow ring-1 ring-slate-900/10 relative bg-white text-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                        class="mt-5 p-1 flex items-center rounded-md shadow ring-1 ring-slate-900/10 relative bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
                         @click="$emit('closeMoreInfoModal')"
                       >
                         <span class="absolute -inset-2.5" />
@@ -53,12 +53,8 @@
                   >
                     <!-- Your content -->
                     <div class="">
-                      <DialogTitle
-                        class="mt-3 mb-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-                        >{{ link.name }}</DialogTitle
-                      >
                       <!-- <DialogTitle
-                        class="mt-6 mb-8 text-[2rem] font-bold leading-8 text-gray-900"
+                        class="mt-3 mb-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
                         >{{ link.name }}</DialogTitle
                       > -->
                     </div>
@@ -77,159 +73,15 @@
                       <div
                         class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8"
                       >
-                        <div class="lg:pr-4">
+                        <div class="lg:pr-4 md:col-span-2">
                           <div
                             class="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg"
                           >
-                            <p>
-                              Faucibus commodo massa rhoncus, volutpat.
-                              Dignissim sed eget risus enim. Mattis mauris
-                              semper sed amet vitae sed turpis id. Id dolor
-                              praesent donec est. Odio penatibus risus viverra
-                              tellus varius sit neque erat velit. Faucibus
-                              commodo massa rhoncus, volutpat. Dignissim sed
-                              eget risus enim. Mattis mauris semper sed amet
-                              vitae sed turpis id.
-                            </p>
+                            <TiptapReadOnly
+                              :portfolio_blog="link.data.website_blog"
+                            />
 
-                            <p class="mt-8">
-                              Et vitae blandit facilisi magna lacus commodo.
-                              Vitae sapien duis odio id et. Id blandit molestie
-                              auctor fermentum dignissim. Lacus diam tincidunt
-                              ac cursus in vel. Mauris varius vulputate et
-                              ultrices hac adipiscing egestas. Iaculis convallis
-                              ac tempor et ut. Ac lorem vel integer orci.
-                            </p>
-                            <h3
-                              class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
-                            >
-                              Highlights
-                            </h3>
-                            <ul
-                              role="list"
-                              class="mt-4 list-disc space-y-2 pl-4 text-sm"
-                            >
-                              <li class="text-gray-400">
-                                <span class="text-gray-600"
-                                  >✅ $580,078 in TTM revenue</span
-                                >
-                              </li>
-                              <li class="text-gray-400">
-                                <span class="text-gray-600"
-                                  >✅ $580,078 in TTM revenue</span
-                                >
-                              </li>
-                              <li class="text-gray-400">
-                                <span class="text-gray-600"
-                                  >✅ $580,078 in TTM revenue</span
-                                >
-                              </li>
-                              <li class="text-gray-400">
-                                <span class="text-gray-600"
-                                  >✅ $580,078 in TTM revenue</span
-                                >
-                              </li>
-                              <li class="text-gray-400">
-                                <span class="text-gray-600"
-                                  >✅ $580,078 in TTM revenue</span
-                                >
-                              </li>
-                            </ul>
-                            <div class="max-w-xl lg:max-w-lg mt-14">
-                              <h2
-                                class="text-3xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl"
-                              >
-                                Get notified when we’re launching.
-                              </h2>
-                              <p
-                                class="mt-4 text-center text-lg leading-8 text-gray-600"
-                              >
-                                Nostrud amet eu ullamco nisi aute in ad minim
-                                nostrud adipisicing velit quis. Duis tempor
-                                incididunt dolore.
-                              </p>
-                              <div class="mt-6 flex max-w-md gap-x-4">
-                                <label for="email-address" class="sr-only"
-                                  >Email address</label
-                                >
-                                <input
-                                  id="email-address"
-                                  name="email"
-                                  type="email"
-                                  autocomplete="email"
-                                  required=""
-                                  class="min-w-0 flex-auto rounded-md border-0 bg-gray-50 focus:bg-gray-100 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                                  placeholder="Enter your email"
-                                />
-                                <button
-                                  type="submit"
-                                  class="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                                >
-                                  Notify me
-                                </button>
-                              </div>
-                            </div>
-                            <div>
-                              <h2
-                                class="mt-16 text-2xl font-bold tracking-tight text-gray-900"
-                              >
-                                Financials
-                              </h2>
-                              <h3
-                                class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
-                              >
-                                snapshot
-                              </h3>
-                              <div class="mx-auto py-1 px-4 max-w-[80rem]">
-                                <div>
-                                  <div class="grid mt-5 gap-5 grid-cols-1">
-                                    <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
-                                    >
-                                      <p
-                                        class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
-                                      >
-                                        TTM gross revenue
-                                      </p>
-                                      <p
-                                        class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
-                                      >
-                                        $580k
-                                      </p>
-                                    </div>
-                                    <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
-                                    >
-                                      <p
-                                        class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
-                                      >
-                                        TTM net profit
-                                      </p>
-                                      <p
-                                        class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
-                                      >
-                                        $190k
-                                      </p>
-                                    </div>
-                                    <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
-                                    >
-                                      <p
-                                        class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
-                                      >
-                                        TTM gross revenue
-                                      </p>
-                                      <p
-                                        class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
-                                      >
-                                        $580k
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
+                            <div v-if="link.data.isShowMetrics">
                               <h2
                                 class="mt-16 text-2xl font-bold tracking-tight text-gray-900"
                               >
@@ -238,13 +90,13 @@
                               <h3
                                 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
                               >
-                                Customer's metrics
+                                {{ link.name }}'s metrics
                               </h3>
                               <div class="mx-auto py-1 px-4 max-w-[80rem]">
                                 <div>
                                   <div class="grid mt-5 gap-5 grid-cols-1">
                                     <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
+                                      class="py-8 px-4 rounded-[1rem] bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
                                     >
                                       <p
                                         class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
@@ -254,11 +106,11 @@
                                       <p
                                         class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
                                       >
-                                        $100
+                                        {{ link.data.currentMrr_formated }}
                                       </p>
                                     </div>
                                     <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
+                                      class="py-8 px-4 rounded-[1rem] bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
                                     >
                                       <p
                                         class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
@@ -268,11 +120,11 @@
                                       <p
                                         class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
                                       >
-                                        $12000
+                                        {{ link.data.currentArr_formated }}
                                       </p>
                                     </div>
                                     <div
-                                      class="py-8 px-4 rounded-md bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
+                                      class="py-8 px-4 rounded-[1rem] bg-white p-4 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 overflow-hidden"
                                     >
                                       <p
                                         class="text-gray-600 font-medium text-sm overflow-hidden text-ellipsis whitespace-nowrap"
@@ -282,29 +134,13 @@
                                       <p
                                         class="text-gray-900 font-semibold text-3xl tracking-tight mt-1"
                                       >
-                                        200-1000
+                                        {{ link.data.customers_formated }}
                                       </p>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-
-                            <h2
-                              class="mt-16 text-2xl font-bold tracking-tight text-gray-900"
-                            >
-                              No server? No problem.
-                            </h2>
-                            <p class="mt-6">
-                              Id orci tellus laoreet id ac. Dolor, aenean leo,
-                              ac etiam consequat in. Convallis arcu ipsum urna
-                              nibh. Pharetra, euismod vitae interdum mauris
-                              enim, consequat vulputate nibh. Maecenas
-                              pellentesque id sed tellus mauris, ultrices
-                              mauris. Tincidunt enim cursus ridiculus mi.
-                              Pellentesque nam sed nullam sed diam turpis ipsum
-                              eu a sed convallis diam.
-                            </p>
                           </div>
                         </div>
                       </div>
@@ -321,27 +157,25 @@
                         />
                       </div>
 
-                      <div
-                        class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0"
-                      >
+                      <div class="p-2 lg:mt-0 w-full">
                         <div
-                          class="rounded-2xl py-2 px-4 text-center lg:flex lg:flex-col lg:justify-center lg:py-16"
+                          class="rounded-2xl py-2 px-4 text-center lg:flex lg:flex-col lg:justify-center lg:py-10"
                         >
-                          <div class="mx-auto max-w-xs">
+                          <div class="mx-2">
                             <div
-                              class="flex flex-row flex-nowrap items-center justify-between"
+                              class="flex flex-row flex-nowrap items-start justify-between"
                             >
                               <h2
-                                class="mb-4 text-3xl text-left overflow-hidden max-w-[10rem] font-bold tracking-tight text-gray-900"
+                                class="mb-4 text-3xl md:text-4xl text-left overflow-hidden max-w-[10rem] font-bold tracking-tight text-gray-900"
                               >
-                                Indie Design Kit
+                                {{ link.data.product_name }}
                               </h2>
                               <p
-                                class="mt-6 flex items-baseline justify-center gap-x-2"
+                                class="flex items-baseline justify-center gap-x-2"
                               >
                                 <span
-                                  class="text-3xl font-bold tracking-tight text-gray-900"
-                                  >$19</span
+                                  class="text-2xl md:text-5xl font-bold tracking-tight text-gray-900"
+                                  >${{ link.data.product_price }}</span
                                 >
                                 <span
                                   class="text-sm font-semibold leading-6 tracking-wide text-gray-600"
@@ -352,11 +186,13 @@
 
                             <a
                               href="#"
-                              class="mt-8 block w-full rounded-full bg-purple-700 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                              >Buy Vanta for $19</a
+                              class="mt-8 block w-full rounded-full bg-purple-700 px-3 py-2 md:py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                              >Buy {{ link.data.product_name }} for ${{
+                                link.data.product_price
+                              }}</a
                             >
                             <a
-                              class="group w-full block mt-4 py-2.5 px-5 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-400 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 transition ease-in-out duration-200"
+                              class="group w-full block mt-4 py-2 md:py-4 px-5 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-400 hover:bg-gray-100 hover:text-purple-700 focus:z-10 focus:ring-4 focus:ring-gray-200 transition ease-in-out duration-200"
                               ><div
                                 class="flex flex-row items-center justify-center"
                               >
@@ -383,45 +219,13 @@
                       <div
                         class="mt-4 lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8"
                       >
-                        <div class="lg:pr-4">
+                        <div class="lg:pr-4 md:col-span-2">
                           <div
                             class="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg"
                           >
-                            <p>
-                              Faucibus commodo massa rhoncus, volutpat.
-                              Dignissim sed eget risus enim. Mattis mauris
-                              semper sed amet vitae sed turpis id. Id dolor
-                              praesent donec est. Odio penatibus risus viverra
-                              tellus varius sit neque erat velit. Faucibus
-                              commodo massa rhoncus, volutpat. Dignissim sed
-                              eget risus enim. Mattis mauris semper sed amet
-                              vitae sed turpis id.
-                            </p>
-
-                            <p class="mt-8">
-                              Et vitae blandit facilisi magna lacus commodo.
-                              Vitae sapien duis odio id et. Id blandit molestie
-                              auctor fermentum dignissim. Lacus diam tincidunt
-                              ac cursus in vel. Mauris varius vulputate et
-                              ultrices hac adipiscing egestas. Iaculis convallis
-                              ac tempor et ut. Ac lorem vel integer orci.
-                            </p>
-
-                            <h2
-                              class="mt-16 text-2xl font-bold tracking-tight text-gray-900"
-                            >
-                              Portfolioo? No problem.
-                            </h2>
-                            <p class="mt-6">
-                              Id orci tellus laoreet id ac. Dolor, aenean leo,
-                              ac etiam consequat in. Convallis arcu ipsum urna
-                              nibh. Pharetra, euismod vitae interdum mauris
-                              enim, consequat vulputate nibh. Maecenas
-                              pellentesque id sed tellus mauris, ultrices
-                              mauris. Tincidunt enim cursus ridiculus mi.
-                              Pellentesque nam sed nullam sed diam turpis ipsum
-                              eu a sed convallis diam.
-                            </p>
+                            <TiptapReadOnly
+                              :portfolio_blog="link.data.product_desc"
+                            />
                           </div>
                         </div>
                       </div>
@@ -432,7 +236,7 @@
                         style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04)"
                       >
                         <img
-                          :src="link.thumbnailurl"
+                          :src="link.thumbnailimage"
                           alt=""
                           class="w-full h-full rounded-[1rem] object-cover"
                         />
@@ -445,40 +249,9 @@
                           <div
                             class="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg"
                           >
-                            <p>
-                              Faucibus commodo massa rhoncus, volutpat.
-                              Dignissim sed eget risus enim. Mattis mauris
-                              semper sed amet vitae sed turpis id. Id dolor
-                              praesent donec est. Odio penatibus risus viverra
-                              tellus varius sit neque erat velit. Faucibus
-                              commodo massa rhoncus, volutpat. Dignissim sed
-                              eget risus enim. Mattis mauris semper sed amet
-                              vitae sed turpis id.
-                            </p>
-
-                            <p class="mt-8">
-                              Et vitae blandit facilisi magna lacus commodo.
-                              Vitae sapien duis odio id et. Id blandit molestie
-                              auctor fermentum dignissim. Lacus diam tincidunt
-                              ac cursus in vel. Mauris varius vulputate et
-                              ultrices hac adipiscing egestas. Iaculis convallis
-                              ac tempor et ut. Ac lorem vel integer orci.
-                            </p>
-                            <h2
-                              class="mt-16 text-2xl font-bold tracking-tight text-gray-900"
-                            >
-                              No server? No problem.
-                            </h2>
-                            <p class="mt-6">
-                              Id orci tellus laoreet id ac. Dolor, aenean leo,
-                              ac etiam consequat in. Convallis arcu ipsum urna
-                              nibh. Pharetra, euismod vitae interdum mauris
-                              enim, consequat vulputate nibh. Maecenas
-                              pellentesque id sed tellus mauris, ultrices
-                              mauris. Tincidunt enim cursus ridiculus mi.
-                              Pellentesque nam sed nullam sed diam turpis ipsum
-                              eu a sed convallis diam.
-                            </p>
+                            <TiptapReadOnly
+                              :portfolio_blog="link.data.portfolio_blog"
+                            />
                           </div>
                         </div>
                       </div>

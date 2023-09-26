@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=DM+Mono:wght@300;400;500&family=Dancing+Script:wght@400;500;600;700&family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&family=Nanum+Pen+Script&family=Pacifico&family=Roboto:wght@100;300;400;500;700;900&family=Rubik:wght@300;400;500;600;700;800;900&family=Satisfy&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,7 +7,9 @@
 :root {
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI,
     system-ui, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji",
+    Inter, Courgette, "Dancing Script", Fredoka, Pacifico, "DM Mono",
+    "Nanum Pen Script", "Space Mono", Satisfy, Rubik;
 
   font-size: 16px;
   line-height: 24px;
@@ -53,10 +57,12 @@ a:hover {
 
 body {
   margin: 0;
-
+  font-family: Inter, Helvetica, system-ui, Segoe UI;
   place-items: center;
+  max-width: 100vw;
   min-width: 320px;
-  /* min-height: 100vh; */
+  height: 100vh;
+  scroll-behavior: smooth !important;
 }
 
 .card-light-shadow {
@@ -70,8 +76,8 @@ body {
 }
 
 .inputs {
-  padding-left: 1.5rem;
-  padding-right: 1rem;
+  /* padding-left: 1.5rem;
+  padding-right: 1rem; */
   font-size: 1rem;
   line-height: 2;
   line-height: 1.5rem;
@@ -97,4 +103,52 @@ body {
   /* background-color: rgba(255, 255, 255, 0.5); */
   background-color: rgba(209, 205, 205, 0.5);
   backdrop-filter: blur(10px);
+}
+.imageoverlaygray {
+  background: linear-gradient(
+    to bottom,
+    rgba(89, 89, 89, 0.8) 0%,
+    rgba(89, 89, 89, 0.298) 33%,
+    rgba(15, 15, 15, 1) 100%
+  );
+}
+
+.deepspacegradiet {
+  background: #0f1417; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #293239,
+    #0f1417
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #293239,
+    #0f1417
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.darkskiesgradiet {
+  background: #4b79a1; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #283e51,
+    #4b79a1
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #283e51,
+    #4b79a1
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.twitchgradiet {
+  background: #6441a5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #2a0845,
+    #6441a5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #2a0845,
+    #6441a5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
